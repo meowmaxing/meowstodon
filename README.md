@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # meow-soc
 
 A *very* light fork of [Chuckya](https://github.com/TheEssem/mastodon) with minor changes, which is used by the [meowstodon instance](https://masto.meowing.zip)
@@ -10,6 +11,8 @@ Changes include:
 
 Chuckya's original README is below.
 =======
+=======
+>>>>>>> 06b189526b (Merge remote-tracking branch 'origin/loosen-like-federation')
 # <img src="https://synth.download/assets/synth.download/synth.png" height="128"> Merpstodon
 
 A very light fork of [Chuckya](https://github.com/TheEssem/mastodon) with very minor changes that runs on [our Mastodon instance](https://merping.synth.download).
@@ -19,7 +22,10 @@ Changes currently including
 - Advanced lists. Listen to keywords, exclude boosts, only include posts with media. With optional https://relay.fedi.buzz ingress.
 - Custom Synth.download theme
 
+<<<<<<< HEAD
 >>>>>>> 04ecbe5aca (Merge remote-tracking branch 'origin/loosen-like-federation')
+=======
+>>>>>>> 06b189526b (Merge remote-tracking branch 'origin/loosen-like-federation')
 ---
 
 # <img src="https://github.com/TheEssem/mastodon/raw/main/public/chuckya.svg" width="128"> Chuckya
