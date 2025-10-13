@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # meow-soc
 
 A *very* light fork of [Chuckya](https://github.com/TheEssem/mastodon) with minor changes, which is used by the [meowstodon instance](https://masto.meowing.zip)
@@ -8,6 +9,19 @@ Changes include:
 - Optional [catppuccin](https://catppuccin.com) theme, with a mauve accent color.
 
 Chuckya's original README is below.
+=======
+# <img src="https://synth.download/assets/synth.download/synth.png" height="128"> Merpstodon
+
+A very light fork of [Chuckya](https://github.com/TheEssem/mastodon) with very minor changes that runs on [our Mastodon instance](https://merping.synth.download).
+
+Changes currently including
+- Patches for PGroonga full text search support, over Elasticsearch
+- Advanced lists. Listen to keywords, exclude boosts, only include posts with media. With optional https://relay.fedi.buzz ingress.
+- Remove favorite and reaction federation restrictions; federate likes and reacts to all followers.
+- Audio files are converted to opus instead of mp3.
+- More webp support, like tootctl; static emojis/avatars/headers previews use webp.
+- Custom Synth.download theme
+>>>>>>> c11a6aa98a (Merge remote-tracking branch 'origin/loosen-like-federation')
 
 ---
 

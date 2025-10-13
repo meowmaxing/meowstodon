@@ -43,15 +43,102 @@ class SearchService < BaseService
   end
 
   def perform_statuses_search!
-    StatusesSearchService.new.call(
-      @query,
-      @account,
-      limit: @limit,
-      offset: @offset,
-      account_id: @options[:account_id],
-      min_id: @options[:min_id],
-      max_id: @options[:max_id]
-    )
+    # select all public statuses and all statuses from the account the quried
+    results = Status.where(visibility: :public, reblog_of_id: nil)
+    results = results.or(Status.where(account_id: @account.id, reblog_of_id: nil)) if @account.present?
+
+    flags, query = parse_search_flags
+
+    if !query.strip.empty?
+      text_matches = results.where("statuses.text &@~ ?", query).select(:id)
+      media_matches = results.joins(:media_attachments).where("media_attachments.description &@~ ?", query).select('statuses.id')
+    
+      results = results.where(id: text_matches).or(results.where(id: media_matches))
+    end
+
+    # check if authed to resolve flags.
+    if @account.present?
+      if flags[:from].present?
+        positive = flags[:from].select { |f| !f[:not] }
+        negative = flags[:from].select { |f| f[:not] }
+
+        accounts = positive.flat_map {|entry| resolve_account_ids(entry[:value]) }.uniq
+        return Status.none if positive.any? && accounts.empty?
+        results = results.where(account_id: accounts) if accounts.any?
+
+        not_accounts = negative.flat_map {|entry| resolve_account_ids(entry[:value])}.uniq
+        results = results.where.not(account_id: not_accounts) if not_accounts.any?
+      end
+
+      if flags[:has].present?
+        flags[:has].each do |entry|
+          case entry[:value].downcase
+          when 'media'
+            op = entry[:not] ? '=' : '>'
+            results = results.where("COALESCE(array_length(ordered_media_attachment_ids, 1), 0) #{op} 0")
+          when 'poll'
+            results = entry[:not] ? results.where(poll_id: nil) : results.where.not(poll_id: nil)
+          end
+        end
+      end
+
+      if flags[:is].present?
+        flags[:is].each do |entry|
+          case entry[:value].downcase
+          when 'reply'
+            results = results.where(reply: entry[:not] ? false : true)
+          when 'sensitive'
+            results = results.where(sensitive: entry[:not] ? false : true)
+          end
+        end
+      end
+
+      if flags[:language].present?
+        positive = flags[:language].select { |f| !f[:not] }.map { |f| f[:value].downcase }
+        negative = flags[:language].select { |f| f[:not] }.map { |f| f[:value].downcase }
+
+        results = results.where(language: positive) if positive.any?
+        results = results.where.not(language: negative) if negative.any?
+      end
+    end
+
+    # legacy flags
+    results = results.where(account_id: @options[:account_id]) if @options[:account_id].present?
+    results = results.where('statuses.id > ?', @options[:min_id]) if @options[:min_id].present?
+    results = results.where(statuses: { id: ...(@options[:max_id]) }) if @options[:max_id].present?
+
+    results = results.distinct.limit(@limit).offset(@offset)
+
+    account_ids         = results.map(&:account_id)
+    account_domains     = results.map(&:account_domain)
+    preloaded_relations = @account.relations_map(account_ids, account_domains)
+
+    results.reject { |status| StatusFilter.new(status, @account, preloaded_relations).filtered? }
+  end
+
+  def resolve_account_ids(value)
+    return Account.none if value.blank?
+    v = value.to_s.strip
+
+    return @account.id if v.downcase == 'me'
+
+    if (m = v.match(/\A@?([^@]+)@(.+)\z/))
+      return Account.where(username: m[1], domain: m[2]).pluck(:id)
+    end
+
+    username = v.sub(/\A@/, '')
+    Account.where(username: username, domain: nil).pluck(:id)
+  end
+
+  def parse_search_flags
+    query = @query.to_s.dup
+    flags = Hash.new { |h,k| h[k] = [] }
+
+    while (m = query.match(/(-?)(\w+):(?:"([^"]+)"|(\S+))/))
+      flags[m[2].downcase.to_sym] << { not: m[1] == '-', value: (m[3] || m[4]) }
+      query.sub!(m[0], '')
+    end
+    [flags, query]
   end
 
   def perform_hashtags_search!
@@ -84,7 +171,7 @@ class SearchService < BaseService
   end
 
   def status_searchable?
-    Chewy.enabled? && status_search? && @account.present?
+    status_search? && @account.present?
   end
 
   def account_searchable?
