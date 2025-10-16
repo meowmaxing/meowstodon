@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # meow-soc
 
 A *very* light fork of [Chuckya](https://github.com/TheEssem/mastodon) with minor changes, which is used by the [meowstodon instance](https://masto.meowing.zip)
@@ -10,6 +11,8 @@ Changes include:
 
 Chuckya's original README is below.
 =======
+=======
+>>>>>>> 58d9e1bc29 (Merge branch 'loosen-like-federation')
 # <img src="https://synth.download/assets/synth.download/synth.png" height="128"> Merpstodon
 
 A very light fork of [Chuckya](https://github.com/TheEssem/mastodon) with very minor changes that runs on [our Mastodon instance](https://merping.synth.download).
@@ -21,7 +24,10 @@ Changes currently including
 - Audio files are converted to opus instead of mp3.
 - More webp support, like tootctl; static emojis/avatars/headers previews use webp.
 - Custom Synth.download theme
+<<<<<<< HEAD
 >>>>>>> c11a6aa98a (Merge remote-tracking branch 'origin/loosen-like-federation')
+=======
+>>>>>>> 58d9e1bc29 (Merge branch 'loosen-like-federation')
 
 ---
 
