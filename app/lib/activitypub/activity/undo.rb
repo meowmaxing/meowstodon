@@ -107,7 +107,7 @@ class ActivityPub::Activity::Undo < ActivityPub::Activity
   def undo_like
     status = status_from_uri(target_uri)
 
-    return if status.nil? || !status.account.local?
+    return if status.nil?
 
     if @account.favourited?(status)
       favourite = status.favourites.where(account: @account).first
@@ -125,7 +125,7 @@ class ActivityPub::Activity::Undo < ActivityPub::Activity
 
     status = status_from_uri(target_uri)
 
-    return if status.nil? || !status.account.local?
+    return if status.nil?
 
     if CUSTOM_EMOJI_REGEX.match?(name)
       name.delete! ':'

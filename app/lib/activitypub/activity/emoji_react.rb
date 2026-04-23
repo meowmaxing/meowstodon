@@ -7,7 +7,6 @@ class ActivityPub::Activity::EmojiReact < ActivityPub::Activity
     original_status = status_from_uri(object_uri)
     name = @json['content'].dup
     return if original_status.nil? ||
-              !original_status.account.local? ||
               delete_arrived_first?(@json['id'])
 
     if CUSTOM_EMOJI_REGEX.match?(name)
@@ -21,7 +20,7 @@ class ActivityPub::Activity::EmojiReact < ActivityPub::Activity
 
     reaction = original_status.status_reactions.create!(account: @account, name: name, custom_emoji: custom_emoji)
 
-    LocalNotificationWorker.perform_async(original_status.account_id, reaction.id, 'StatusReaction', 'reaction')
+    LocalNotificationWorker.perform_async(original_status.account_id, reaction.id, 'StatusReaction', 'reaction') if original_status.account.local?
   rescue ActiveRecord::RecordInvalid
     nil
   end
