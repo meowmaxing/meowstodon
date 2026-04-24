@@ -1,0 +1,790 @@
+:root {
+	--background-color: hsl(220deg, 21%, 89%);
+    --surface-variant-background-color: hsl(220deg, 23%, 95%);
+    --accent: 136, 57, 239;
+    --rich-text-text-color: #7287fd;
+    --rich-text-decorations-color: var(--rich-text-text-color);
+    --rich-text-container-color: #dce0e8;
+    --text: #4c4f69;
+    --sub-text: #5c5f77;
+    --sub-text2: #6c6f85;
+    --elevated-tint: #e6e9ef;
+	--nested-card-background: rgba(var(--accent), 0.05);
+	--border-color: #ccd0da;
+	--surface-background-color: var(--elevated-tint);
+	--dropdown-background-color: var(--elevated-tint);
+	--elevated-color: #dce0e8;
+	--modal-background-color: var(--elevated-tint);
+	--modal-border-color: var(--border-color);
+	--hover-color: rgba(var(--accent), 0.05);
+}
+[data-color-scheme=light][data-contrast=high],
+[data-contrast=high] [data-color-scheme=light] {
+    --color-text-brand: rgb(var(--accent));
+}
+[data-color-scheme=dark][data-contrast=high],
+[data-contrast=high] [data-color-scheme=light] {
+    --color-text-brand: rgb(var(--accent));
+}
+[data-color-scheme=dark],
+html:not([data-color-scheme]) {
+    --background-color: #11111b;
+    --surface-variant-background-color: #45475a;
+    --accent: 203, 166, 247;
+    --rich-text-text-color: #74c7ec;
+    --rich-text-decorations-color: var(--rich-text-text-color);
+    --rich-text-container-color: #585b70;
+    --text: #cdd6f4;
+    --sub-text: #bac2de;
+    --sub-text2: #a6adc8;
+    --elevated-tint: #181825;
+    --nested-card-background: rgba(var(--accent), 0.05);
+    --border-color: #cba6f7;
+    --surface-background-color: var(--elevated-tint);
+    --dropdown-background-color: var(--elevated-tint);
+    --elevated-color: #1e1e2e;
+    --modal-background-color: var(--elevated-tint);
+    --modal-border-color: var(--border-color);
+    --hover-color: rgba(var(--accent), 0.05);
+}
+html {
+    --color-white: #eff1f5;
+    --color-grey-50: #e6e9ef;
+    --color-grey-950: #11111b;
+}
+body {
+    color: var(--text);
+}
+.glitch.local-settings {
+    background: var(--background-color);
+    color: var(--text);
+}
+.glitch.local-settings__navigation__item.close,
+.glitch.local-settings__navigation__item.close:hover {
+    background: #f38ba8;
+    color: var(--background-color);
+}
+.glitch.local-settings__navigation__item.active {
+    background: rgb(var(--accent));
+    color: var(--background-color);
+}
+.glitch.local-settings span.hint {
+    color: var(--sub-text2);
+}
+.column-link.active {
+    color: rgb(var(--accent));
+}
+.edit-indicator__content a.unhandled-link,
+.reply-indicator__content a.unhandled-link,
+.status__content a.unhandled-link {
+    color: rgb(var(--accent));
+}
+.status__content__read-more-button,
+.status__content__translate-button {
+    color: rgb(var(--accent));
+}
+.edit-indicator__content a,
+.reply-indicator__content a,
+.status__content a {
+    color: rgb(var(--accent));
+}
+.edit-indicator__content,
+.reply-indicator__content,
+.status__content {
+    color: var(--text);
+}
+.e-content blockquote,
+.e-content pre,
+.edit-indicator__content blockquote,
+.edit-indicator__content pre,
+.reply-indicator__content blockquote,
+.reply-indicator__content pre,
+.status__content__text blockquote,
+.status__content__text pre {
+    margin-bottom: 12px;
+}
+.button {
+    background-color: rgb(var(--accent));
+    color: var(--background-color);
+}
+.account__header__tabs__name h1 small {
+    color: var(--sub-text);
+}
+.account__disclaimer {
+    color: var(--sub-text2);
+}
+.account__header__bio .account__header__fields dd {
+    color: var(--sub-text2);
+}
+.account__header__bio .account__header__fields .verified a {
+    color: #40a02b;
+}
+.account__action-bar__tab strong {
+    color: var(--text);
+}
+.account__action-bar__tab > span {
+    color: var(--sub-text2);
+}
+.account__header__bio .account__header__content {
+    color: var(--text);
+}
+.account__section-headline a,
+.account__section-headline button,
+.notification__filter-bar a,
+.notification__filter-bar button {
+    color: var(--sub-text2);
+}
+.account__section-headline a.active,
+.account__section-headline button.active,
+.notification__filter-bar a.active,
+.notification__filter-bar button.active {
+    color: var(--text);
+    background: rgba(var(--accent), 0.05);
+}
+.hicolor-privacy-icons .privacy-dropdown__option .icon-lock,
+.hicolor-privacy-icons .status__visibility-icon.icon-lock {
+    color: #df8e1d;
+}
+.hicolor-privacy-icons .privacy-dropdown__option .icon-unlock,
+.hicolor-privacy-icons .status__visibility-icon.icon-unlock {
+    color: #40a02b;
+}
+.hicolor-privacy-icons .privacy-dropdown__option .icon-globe,
+.hicolor-privacy-icons .status__visibility-icon.icon-globe {
+    color: #04a5e5;
+}
+.featured-carousel__header {
+    color: var(--text);
+}
+.icon-button {
+    color: var(--sub-text2);
+}
+.status__relative-time {
+    color: var(--sub-text2);
+}
+.icon-button.active {
+    color: rgb(var(--accent));
+}
+.icon-button.star-icon.active {
+    color: rgb(var(--accent));
+}
+.column-link {
+    color: var(--sub-text);
+    gap: 10px;
+}
+.column-header__title {
+    color: var(--text);
+}
+.account__header__tabs__name h1 {
+    color: var(--text);
+}
+.compose-form__actions .icon-button {
+    color: rgb(var(--accent));
+}
+.compose-form__actions .icon-button:active,
+.compose-form__actions .icon-button:focus,
+.compose-form__actions .icon-button:hover {
+    color: var(--background-color);
+    background-color: rgb(var(--accent));
+}
+.compose-form__actions .icon-button.active {
+    color: var(--background-color);
+    background-color: rgb(var(--accent));
+}
+.privacy-dropdown__option.active,
+.privacy-dropdown__option:focus {
+    color: var(--background-color);
+    background-color: rgb(var(--accent));
+}
+.privacy-dropdown__option.active .privacy-dropdown__option__additional,
+.privacy-dropdown__option.active .privacy-dropdown__option__content,
+.privacy-dropdown__option.active .privacy-dropdown__option__content strong,
+.privacy-dropdown__option:focus .privacy-dropdown__option__additional,
+.privacy-dropdown__option:focus .privacy-dropdown__option__content,
+.privacy-dropdown__option:focus .privacy-dropdown__option__content strong {
+    color: var(--background-color);
+}
+.compose-form .spoiler-input__input {
+    background: rgba(var(--accent), .05);
+    color: rgba(var(--accent));
+}
+.dropdown-button {
+    color: rgb(var(--accent));
+    background: var(--rich-text-container-color);
+}
+.character-counter {
+    color: var(--sub-text);
+}
+.button.button-secondary:active,
+.button.button-secondary:focus,
+.button.button-secondary:hover {
+    color: rgba(var(--accent), 0.5);
+    border: 1px solid rgba(var(--accent), 0.5);
+}
+.button.button-secondary {
+    color: rgb(var(--accent));
+    border: 1px solid rgb(var(--accent));
+}
+.account__domain-pill {
+    color: rgb(var(--accent));
+    background: rgba(var(--accent), 0.2);
+}
+.account__action-bar {
+    border-top: 1px solid var(--sub-text2);
+    border-bottom: 1px solid var(--sub-text2);
+}
+.account__header__bio .account__header__fields a {
+    color: rgb(var(--accent));
+}
+.account__action-bar__tab.active {
+    border-bottom: 4px solid rgb(var(--accent));
+    background: rgba(var(--accent), 0.05);
+}
+.column-back-button {
+    color: rgb(var(--accent));
+}
+.icon-with-badge__badge {
+    background: rgb(var(--accent));
+    color: var(--background-color);
+        margin-top: 4px;
+        margin-right: 4px;
+        border-radius: 24px;
+}
+.notification-group--unread:before,
+.notification-ungrouped--unread:before {
+    -webkit-inline-start: 4px solid rgb(var(--accent));
+    border-inline-start: 4px solid rgb(var(--accent));
+}
+.notification-group--favourite .notification-group__icon {
+    color: rgb(var(--accent));
+}
+.notification-group--reaction .notification-group__icon {
+    color: rgb(var(--accent));
+}
+.notification-group--follow .notification-group__icon,
+.notification-group--follow-request .notification-group__icon {
+    color: rgb(var(--accent));
+}
+.notification-group__main__header__label bdi {
+    color: var(--text);
+}
+.notification-group__main__header__label {
+    color: var(--sub-text2);
+}
+.account__section-headline a.active:before,
+.account__section-headline button.active:before,
+.notification__filter-bar a.active:before,
+.notification__filter-bar button.active:before {
+    background: rgb(var(--accent));
+}
+.hashtag-bar a,
+.hashtag-bar button {
+    color: rgb(var(--accent));
+}
+.link-button {
+    color: rgb(var(--accent));
+}
+.button:active,
+.button:focus,
+.button:hover {
+    background-color: rgba(var(--accent), 0.75);
+}
+.trends__item__name a {
+    color: var(--sub-text);
+}
+.trends__item__name {
+    color var(--sub-text2);
+}
+.getting-started__trends h4 a {
+    color: var(--sub-text);
+}
+.simple_form input[type=datetime-local],
+.simple_form input[type=email],
+.simple_form input[type=number],
+.simple_form input[type=password],
+.simple_form input[type=text],
+.simple_form input[type=url],
+.simple_form textarea {
+    background-color: var(--background-color);
+    color: var(--text);
+}
+.simple_form .input.with_label .label_input > label {
+    color: var(--text);
+}
+.admin-wrapper .content h4 {
+    color: var(--sub-text);
+}
+.admin-wrapper .sidebar ul .simple-navigation-active-leaf a {
+    color: rgb(var(--accent));
+}
+.admin-wrapper .sidebar ul a {
+    color: var(--sub-text2);
+}
+.simple_form p.hint {
+    color: var(--sub-text2);
+}
+.simple_form select {
+    background: var(--background-color) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14.933 18.467' height='19.698' width='15.929'><path d='M3.467 14.967l-3.393-3.5H14.86l-3.392 3.5c-1.866 1.925-3.666 3.5-4 3.5-.335 0-2.135-1.575-4-3.5zm.266-11.234L7.467 0 11.2 3.733l3.733 3.734H0l3.733-3.734z' fill='%2342425C'/></svg>") no-repeat right 8px center/auto 14px;
+}
+.information-badge,
+.simple_form .not_recommended,
+.simple_form .recommended {
+    background-color: rgba(var(--accent), 0.1);
+    border: rgba(var(--accent). 0.5);
+}
+.simple_form .glitch_only {
+    color: #f38ba8;
+    background-color: #f38ba829;
+}
+.simple_form .chuckya_only {
+    color: #b4befe;
+    background-color: #b4befe29;
+}
+.simple_form button:not(.button):not(.link-button):not(.help-button) {
+    background: rgb(var(--accent));
+    color: var(--background-color);
+}
+.simple_form button:not(.button):not(.link-button):not(.help-button):active,
+.simple_form button:not(.button):not(.link-button):not(.help-button):focus,
+.simple_form button:not(.button):not(.link-button):not(.help-button):hover {
+    background: rgba(var(--accent), 0.5);
+}
+.flash-message.notice {
+    color: #40a02b;
+    background: #40a02b29;
+}
+.simple_form .input.radio_buttons .radio label {
+    color: var(--sub-text);
+}
+.simple_form .input.with_floating_label .label_input > label {
+    color: var(--text);
+}
+.admin-wrapper .sidebar ul a:hover {
+    color: var(--text);
+}
+.account__display-name .display-name strong,
+.status__display-name .display-name strong {
+    color: var(--text);
+}
+.status__display-name {
+    color: var(--sub-text2);
+}
+.account__header__fields .verified {
+    background: #40a02b29;
+}
+.prose a {
+    color: rgb(var(--accent));
+}
+.about__section__title {
+    color: rgb(var(--accent));
+}
+.rules-list__text {
+    color: var(--text);
+}
+.rules-list__hint {
+    color: var(--sub-text2);
+}
+.rules-languages > select {
+    background: var(--background-color);
+    color: var(--sub-text);
+}
+.rules-languages > label {
+    color: var(--text);
+}
+.about__bubble-domains__domain h6,
+.about__domain-blocks__domain h6 {
+    color: var(--text);
+}
+.about__bubble-domains__domain:nth-child(2n),
+.about__domain-blocks__domain:nth-child(2n) {
+    background: var(--elevated-color);
+}
+.about__bubble-domains__domain,
+.about__domain-blocks__domain {
+    color: var(--sub-text2);
+}
+.column-header__wrapper.active {
+    box-shadow: 0 1px rgba(var(--accent), .3);
+}
+.column-header__wrapper.active:before {
+    background: radial-gradient(ellipse,rgba(var(--accent),.23),rgba(var(--accent),0) 60%);
+}
+.column-header.active .column-header__icon {
+    color: rgb(var(--accent));
+    text-shadow: 0 0 10px rgba(var(--text),.4);
+}
+.column-header__collapsible {
+    color: var(--sub-text2);
+}
+.column-settings h3 {
+    color: var(--text);
+}
+input.glitch-setting-text {
+    border-bottom: 2px solid #313244;
+}
+input.glitch-setting-text:active,
+input.glitch-setting-text:focus {
+    border-bottom-color: rgb(var(--accent));
+}
+.emoji-mart-anchor {
+    color: var(--sub-text2);
+}
+.emoji-mart-bar:first-child {
+    background: var(--rich-text-container-color);
+}
+.emoji-mart-search input {
+    background: var(--rich-text-container-color);
+}
+.attachment-list__list a {
+    color: var(--sub-text2);
+}
+.button.button-tertiary {
+    color: rgb(var(--accent));
+    border: 1px solid rgb(var(--accent));
+}
+.button.button-tertiary:active,
+.button.button-tertiary:focus,
+.button.button-tertiary:hover {
+    color: var(--background-color);
+    background: rgba(var(--accent),0.5);
+}
+.edit-indicator__content a.unhandled-link .link-origin-tag,
+.reply-indicator__content a.unhandled-link .link-origin-tag,
+.status__content a.unhandled-link .link-origin-tag {
+    color: #f9e2af;
+}
+.dropdown-button.active {
+    background: rgb(var(--accent));
+    border-color: rgb(var(--accent));
+    color: var(--background-color);
+}
+.language-dropdown__dropdown__results__item.active,
+.language-dropdown__dropdown__results__item:focus {
+    background: rgb(var(--accent));
+    color: var(--background-color);
+}
+.language-dropdown__dropdown__results__item.active .language-dropdown__dropdown__results__item__common-name,
+.language-dropdown__dropdown__results__item:focus .language-dropdown__dropdown__results__item__common-name {
+    color: var(--background-color);
+}
+.language-dropdown__dropdown__results__item__common-name {
+    color: var(--sub-text2);
+}
+.language-dropdown__dropdown__results__item {
+    color: var(--text);
+}
+.language-dropdown__dropdown .emoji-mart-search input {
+    color: var(--sub-text2);
+    background: var(--background-color);
+}
+.privacy-dropdown__option {
+    color: var(--text);
+}
+.privacy-dropdown__option__content {
+    color: var(--sub-text2);
+}
+.privacy-dropdown__option__content strong {
+    color: var(--text);
+}
+.react-toggle--checked .react-toggle-track {
+    background-color: rgb(var(--accent));
+}
+.react-toggle-thumb {
+    background-color: var(--background-color);
+}
+.status__prepend {
+    color: var(--sub-text2);
+}
+.poll__chart.leading {
+    background: rgb(var(--accent));
+}
+.poll__chart {
+    background: var(--sub-text2);
+}
+.compose-form__actions .icon-button.disabled {
+    color: rgb(var(--accent),0.5);
+}
+.dropdown-button[disabled] {
+    color: rgb(var(--accent),0.5);
+    border-color: rgb(var(--accent),0.5);
+}
+.edit-indicator {
+    background: var(--rich-text-container-color);
+    border-bottom: 0.5px solid var(--border-color);
+}
+.edit-indicator__header {
+    color: var(--sub-text);
+}
+.detailed-status__display-name {
+    color: var(--sub-text2);
+}
+.detailed-status__display-name strong {
+    color: var(--text);
+}
+.load-more .loading-indicator .circular-progress {
+    color: rgb(var(--accent), 0.5);
+}
+.icon-button:active,
+.icon-button:focus-visible,
+.icon-button:hover {
+    color: rgb(var(--accent));
+    background-color: rgba(var(--accent), .15);
+}
+.help-button {
+    color: var(--background-color);
+    background: rgb(var(--accent));
+}
+.help-button:active,
+.help-button:focus,
+.help-button:hover {
+    background: rgba(var(--accent), 0.5);
+}
+.compose-form__sensitive-button input[type=checkbox]:checked {
+    background-color: rgb(var(--accent));
+    border-color: rgb(var(--accent));
+}
+.compose-form__sensitive-button input[type=checkbox]:active,
+.compose-form__sensitive-button input[type=checkbox]:focus,
+.compose-form__sensitive-button input[type=checkbox]:hover {
+    border-color: rgb(var(--accent));
+    color: rgb(var(--accent));
+}
+.compose-form__sensitive-button input[type=checkbox] {
+    border: 1px solid var(--sub-text2);
+}
+.icon-button.active:hover {
+    color: rgb(var(--accent));
+    background: rgba(var(--accent), 0.15);
+}
+.hashtag-bar a:after {
+    background-color: rgba(var(--accent), 0.15);
+}
+.hashtag-bar .link-button {
+    color: var(--sub-text2);
+}
+.account-role {
+    color: rgb(var(--accent));
+    border: 1px solid rgb(var(--accent));
+}
+a.status-card:active .status-card__author,
+a.status-card:active .status-card__description,
+a.status-card:active .status-card__host,
+a.status-card:active .status-card__title,
+a.status-card:focus .status-card__author,
+a.status-card:focus .status-card__description,
+a.status-card:focus .status-card__host,
+a.status-card:focus .status-card__title,
+a.status-card:hover .status-card__author,
+a.status-card:hover .status-card__description,
+a.status-card:hover .status-card__host,
+a.status-card:hover .status-card__title {
+    color: rgb(var(--accent));
+}
+.status-card {
+    color: var(--sub-text2);
+}
+.status-card__title {
+    color: var(--text);
+}
+.search__popout__menu__item mark {
+    color: var(--text);
+}
+.search__popout__menu__item:hover mark {
+    color: var(--background-color);
+}
+.search__popout__menu__item {
+    color: var(--sub-text2);
+}
+.search__popout h4 {
+    color: var(--sub-text2);
+}
+.search__popout__menu__item:hover {
+    background: rgb(var(--accent));
+    color: var(--background-color);
+}
+.search__popout .icon-button {
+    color: var(--sub-text2);
+}
+.search__popout .icon-button:hover {
+    color: var(--background-color);
+}
+.empty-column-indicator,
+.follow_requests-unlocked_explanation {
+    color: var(--sub-text2);
+}
+.column-link:active,
+.column-link:focus,
+.column-link:hover {
+    color: rgb(var(--accent));
+}
+.column-link:before {
+    background-color: rgba(var(--accent),0.15);
+}
+.trends__item__sparkline path:last-child {
+    stroke: rgb(var(--accent)) !important;
+}
+.trends__item__sparkline path:first-child {
+    fill: rgba(var(--accent), 0.25) !important;
+}
+.account__domain-pill.active {
+    background: rgb(var(--accent));
+    color: var(--background-color);
+}
+.account__domain-pill__popout__header__icon {
+    background: rgb(var(--accent));
+    color: var(--background-color);
+}
+.account__domain-pill__popout__header h3 {
+    color: var(--text);
+}
+.account__domain-pill__popout__handle {
+    background: rgba(var(--accent),0.15);
+    color: rgb(var(--accent));
+}
+.account__domain-pill__popout__parts__icon {
+    color: rgb(var(--accent));
+}
+.account__domain-pill__popout__parts h6 {
+    color: var(--text);
+}
+.account__domain-pill__popout {
+    color: var(--sub-text2);
+}
+.emoji-mart-anchor-bar {
+    background-color: rgb(var(--accent));
+}
+.emoji-mart-anchor-selected:hover {
+    color: rgb(var(--accent));
+}
+.emoji-mart-anchor:hover {
+    color: rgb(var(--accent));
+}
+.compose-form__poll__select__value {
+    color: rgb(var(--accent));
+}
+.compose-form__poll__select__label {
+    color: var(--sub-text);
+}
+.poll__option input[type=text] {
+    background: var(--background-color);
+    color: var(--sub-text);
+}
+.poll__option input[type=text]:focus {
+    border-color: rgb(var(--accent));
+}
+.poll__input {
+    border: 1px soild #585b70;
+}
+.compose-form__highlightable.active {
+    border-color: rgb(var(--accent));
+}
+.admin-wrapper .content__heading__tabs a.selected {
+    background: rgb(var(--accent));
+    color: var(--background-color);
+}
+.admin-wrapper .content__heading__tabs a {
+    color: var(--sub-text2);
+}
+.boost-modal__action-bar,
+.doodle-modal__action-bar {
+    background: var(--background-color);
+}
+.boost-modal__action-bar > div,
+.doodle-modal__action-bar > div {
+    color: var(--text);
+}
+.doodle-modal__action-bar .doodle-palette {
+    background: var(--background-color);
+}
+.doodle-modal__container canvas {
+    border: 5px solid var(--elevated-tint);
+}
+.media-modal__overlay .picture-in-picture__footer .icon-button.active {
+    color: rgb(var(--accent));
+}
+.media-modal__overlay .picture-in-picture__footer .icon-button.active:active,
+.media-modal__overlay .picture-in-picture__footer .icon-button.active:focus,
+.media-modal__overlay .picture-in-picture__footer .icon-button.active:hover {
+    background: rgba(var(--accent), 0.15);
+}
+.media-modal__overlay .picture-in-picture__footer .icon-button {
+    color: var(--text);
+}
+.media-modal__overlay .picture-in-picture__footer .icon-button:active,
+.media-modal__overlay .picture-in-picture__footer .icon-button:focus,
+.media-modal__overlay .picture-in-picture__footer .icon-button:hover {
+    color: var(--text);
+    background-color: rgba(var(--accent), 0.15);
+}
+.compose-form .compose-form__upload__warning button.active {
+    color: rgb(var(--accent));
+}
+.account__header__tabs__buttons .icon-button {
+    border: 1px solid rgba(var(--accent), 0.35);
+    background: rgb(var(--accent));
+}
+.privacy-dropdown__option.active,
+.privacy-dropdown__option:focus,
+.visibility-dropdown__option.active,
+.visibility-dropdown__option:focus {
+    background: rgb(var(--accent));
+    color: var(--background-color);
+}
+.dropdown-menu__item--highlighted {
+    color: rgb(var(--accent));
+}
+.notification-bar__action {
+    color: rgb(var(--accent));
+}
+.notification-bar__action:active,
+.notification-bar__action:focus,
+.notification-bar__action:hover {
+    background: rgba(var(--accent), 0.15);
+}
+.no-reduce-motion .status--highlighted-entry:before {
+    background: rgba(var(--accent), 0.2);
+}
+.notification-bar {
+    background: var(--background-color);
+    color: var(--sub-text1);
+}
+.notification-bar__dismiss-button {
+    color: var(--sub-text1);
+}
+.status__info__icons {
+    color: var(--sub-text2);
+}
+.upload-area__content {
+    color: var(--text);
+    border: 2px dashed rgb(var(--accent));
+}
+.upload-area__background {
+    background: var(--background-color);
+}
+.upload-progress {
+    color: var(--sub-text1);
+}
+.upload-progress__tracker {
+    background: rgb(var(--accent));
+}
+.upload-progress .icon path {
+    fill: rgb(var(--accent));
+}
+.compose-form .autosuggest-textarea__textarea,
+.compose-form .spoiler-input__input {
+    color: var(--text);
+}
+.dialog-modal__content__description {
+    color: var(--sub-text2);
+}
+.visibility-dropdown__button {
+    color: var(--sub-text1);
+}
+.visibility-dropdown__helper {
+    color: var(--sub-text2);
+}
+.media-gallery__alt__label,
+.relationship-tag {
+    color: var(--text-color);
+    background: #dce0e8a6;
+}
