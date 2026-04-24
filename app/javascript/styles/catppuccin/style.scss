@@ -18,6 +18,10 @@
 	--modal-border-color: var(--border-color);
 	--hover-color: rgba(var(--accent), 0.05);
 }
+.reactions-bar__item {
+    background: rgb(var(--accent), .75);
+    color: var(--background-color);
+}
 [data-color-scheme=light][data-contrast=high],
 [data-contrast=high] [data-color-scheme=light] {
     --color-text-brand: rgb(var(--accent));
