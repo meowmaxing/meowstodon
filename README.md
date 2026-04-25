@@ -1,3 +1,16 @@
+# meow-soc
+
+A *very* light fork of [Chuckya](https://github.com/TheEssem/mastodon) with minor changes, which is used by the [meowstodon instance](https://masto.meowing.zip)
+
+Changes include:
+
+- Removing favorites and reaction federation restriction; federation of likes and reacts to followers. (yoinked from [synth-download/mastodon](https://github.com/synth-download/mastodon/commit/a112f2b93964f79854fdacc837d40ca17e08736a))
+- Optional [catppuccin](https://catppuccin.com) theme, with a mauve accent color.
+
+Chuckya's original README is below.
+
+---
+
 # <img src="https://github.com/TheEssem/mastodon/raw/main/public/chuckya.svg" width="128"> Chuckya
 
 Chuckya is a close-to-upstream soft fork of Mastodon Glitch Edition (more commonly known as glitch-soc) that aims to introduce more experimental features/fixes with the goal of making the overall experience more enjoyable. Although it's mainly developed for and used on the [wetdry.world](https://wetdry.world) instance, it can be deployed by any server admin as a drop-in, backwards-compatible replacement for Mastodon.
