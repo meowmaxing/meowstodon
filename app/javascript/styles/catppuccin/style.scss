@@ -32,11 +32,17 @@
 [data-contrast=high] [data-color-scheme=light] {
     --color-text-brand: rgb(var(--accent));
     --color-bg-brand-softest: rgba(var(--accent), 0.25);
+    --color-bg-brand-base: rgb(var(--accent));
+    --color-bg-brand-base-hover: rgb(245, 194, 231);
+    --color-border-primary: var(--sub-text2);
 }
 [data-color-scheme=dark][data-contrast=high],
 [data-contrast=high] [data-color-scheme=light] {
     --color-text-brand: rgb(var(--accent));
     --color-bg-brand-softest: rgba(var(--accent), 0.25);
+    --color-bg-brand-base: rgb(var(--accent));
+    --color-bg-brand-base-hover: rgb(245, 194, 231);
+    --color-border-primary: var(--sub-text2);
 }
 [data-color-scheme=dark],
 html:not([data-color-scheme]) {
