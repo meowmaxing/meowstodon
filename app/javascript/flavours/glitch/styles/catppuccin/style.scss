@@ -31,10 +31,12 @@
 [data-color-scheme=light][data-contrast=high],
 [data-contrast=high] [data-color-scheme=light] {
     --color-text-brand: rgb(var(--accent));
+    --color-bg-brand-softest: rgba(var(--accent), 0.25);
 }
 [data-color-scheme=dark][data-contrast=high],
 [data-contrast=high] [data-color-scheme=light] {
     --color-text-brand: rgb(var(--accent));
+    --color-bg-brand-softest: rgba(var(--accent), 0.25);
 }
 [data-color-scheme=dark],
 html:not([data-color-scheme]) {
