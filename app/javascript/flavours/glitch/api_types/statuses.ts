@@ -131,6 +131,8 @@ export interface ApiStatusJSON {
   reactions_count: number;
   reactions: ApiStatusReactionJSON[];
   conversation_id: number;
+  
+  sticky?: boolean;
 }
 
 export interface ApiContextJSON {
