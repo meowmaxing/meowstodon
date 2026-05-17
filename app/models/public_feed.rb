@@ -49,7 +49,7 @@ class PublicFeed
   attr_reader :account, :options
 
   def prepend_stickies(results)
-    return results unless allow_local_only?
+    return results unless local_account?
 
     stickies = Sticky.recent_statuses_for_feed.to_a
     sticky_ids = stickies.to_set(&:id)
