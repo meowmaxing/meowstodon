@@ -538,7 +538,6 @@ fa:
         show:
           enable_feature: به کار انداختن ویژگی
           important_information: اطّلاعات مهم
->>>>>>> refs/remotes/origin/main
     export_domain_allows:
       new:
         title: درون‌ریزی اجازه‌های دامنه
@@ -1465,13 +1464,10 @@ fa:
   edit_profile:
     other: سایر
   email_subscription_mailer:
-<<<<<<< HEAD
-=======
     confirmation:
       action: تأیید نشانی رایانامه
       subject: تأیید نشانی رایانامه‌تان
       title: گرفتن به‌روز رسانی‌های رایانامه‌ای از %{name}؟
->>>>>>> refs/remotes/origin/main
     notification:
       create_account: ایجاد حساب ماستودون
       subject:

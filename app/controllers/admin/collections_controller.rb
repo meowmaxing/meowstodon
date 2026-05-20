@@ -30,6 +30,5 @@ module Admin
         'remove_from_report'
       end
     end
->>>>>>> refs/remotes/origin/main
   end
 end
