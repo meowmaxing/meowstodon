@@ -33,7 +33,7 @@ export const AvatarOverlay: React.FC<Props> = ({
   const friendSrc = hovering
     ? friend?.get('avatar')
     : friend?.get('avatar_static');
-    
+
   return (
     <div
       className='account__avatar-overlay'
