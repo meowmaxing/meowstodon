@@ -5,6 +5,10 @@
   @container (width >= 500px) {
     height: 160px;
   }
+
+  .moved & {
+    filter: grayscale(100%);
+  }
 }
 
 .barWrapper {
@@ -188,6 +192,27 @@ $button-fallback-breakpoint: $button-breakpoint + 55px;
 
 .bio {
   font-size: 15px;
+<<<<<<< HEAD
+=======
+  color: var(--color-text-primary);
+  unicode-bidi: plaintext;
+
+  p {
+    margin-bottom: 20px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  :any-link {
+    color: var(--color-text-status-links);
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+>>>>>>> refs/remotes/origin/main
 }
 
 .familiarFollowers {

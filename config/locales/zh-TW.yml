@@ -341,6 +341,12 @@ zh-TW:
       updated_msg: 成功更新公告！
     collections:
       accounts: 帳號
+      back_to_account: 返回帳號資訊頁面
+      back_to_report: 回到檢舉報告頁面
+      batch:
+        add_to_report: '新增至報告 #%{id}'
+        remove_from_report: 自檢舉報告中移除
+        report: 檢舉
       collection_title: "%{name} 的收藏名單"
       contents: 內容
       number_of_accounts:

@@ -1,4 +1,6 @@
-import { Emoji } from 'flavours/glitch/components/status_reactions';
+import { Emoji } from 'flavours/glitch/components/emoji';
+import { CustomEmojiProvider } from 'flavours/glitch/components/emoji/context';
+import { isUnicodeEmoji } from 'flavours/glitch/features/emoji/utils';
 import { useHovering } from 'flavours/glitch/hooks/useHovering';
 import { autoPlayGif } from 'flavours/glitch/initial_state';
 import type { Account } from 'flavours/glitch/models/account';
@@ -57,6 +59,7 @@ export const AvatarOverlay: React.FC<Props> = ({
     );
   } else {
     overlayElement = (
+<<<<<<< HEAD
       <div className='account__emoji' data-emoji-name={emoji?.name}>
         {emoji && (
           <Emoji
@@ -66,6 +69,12 @@ export const AvatarOverlay: React.FC<Props> = ({
             staticUrl={emoji.static_url}
           />
         )}
+=======
+      <div className='account__emoji' data-emoji-name={emoji.name}>
+        <CustomEmojiProvider emojis={custom}>
+          <Emoji code={code} />
+        </CustomEmojiProvider>
+>>>>>>> refs/remotes/origin/main
       </div>
     );
   }

@@ -338,12 +338,20 @@ fa:
       unpublished_msg: انتشار اعلامیه با موفقیت لغو شد!
       updated_msg: اعلامیه با موفقیت به‌روز شد!
     collections:
+      accounts: حساب‌ها
+      back_to_account: بازگشت به صفحهٔ حساب
+      back_to_report: بازگشت به صفحهٔ گزارش
+      batch:
+        add_to_report: 'افزودن به گزارش #%{id}'
+        report: گزارش
       collection_title: محموعه به دست %{name}
       contents: محتوا
+      no_collection_selected: هیچ مجموعه‌ای تغییر نکرد چرا که مجموعه‌ای گزیده نشده بود
       number_of_accounts:
         one: ۱ حساب
         other: "%{count} حساب"
       open: گشودن
+      title: مجموعه‌ّای حساب - @%{name}
       view_publicly: دیدن عمومی
     critical_update_pending: به‌روز رسانی‌های بحرانی منتظرند
     custom_emojis:
@@ -480,6 +488,57 @@ fa:
       resolved_dns_records_hint_html: نام دامنه به دامنه‌های MX زیر منتقل می شود که در نهایت مسئولیت پذیرش رایانامه را بر عهده دارند. انسداد دامنهٔ MX، ثبت‌نام از هر نشانی رایانامه‌ای را که از همان دامنهٔ MX استفاده می‌کند را مسدود می‌کند؛ حتا اگر نام دامنهٔ نمایان متفاوت باشد. <strong>مراقب باشید ارائه‌دهندگان رایانامهٔ بزرگ را مسدود نکنید.</strong>
       resolved_through_html: از طریق %{domain} حل شد
       title: دامنه‌های رایانامهٔ مسدود شده
+<<<<<<< HEAD
+=======
+    email_subscriptions:
+      accounts:
+        account: حساب
+        active: فعّال
+        empty:
+          hint: هنوز هیچ حسابی مشترک نشده.
+          no_lists_yet: هنوز سیاهه‌ای وجود ندارد
+        inactive: غیرفعّال
+        last_email: آخرین رایانامه
+        status: وضعیت
+        subscribers: مشترکان
+        title: سیاهه‌های پستی
+      additional_footer_texts:
+        show:
+          title: متن پانویس اضافی
+      compliance_settings:
+        additional_footer_text:
+          action: مدیریت
+          title: متن پانویس اضافی
+        privacy_policy:
+          action: مدیریت
+          title: سیاست محرمانگی
+      danger_zone:
+        disable_feature:
+          action: از کار انداختن
+          hint: خاموش کردن ویژگی برای همه
+          title: از کار انداختن ویژگی
+        erase_all_data:
+          action: پاک کردن داده‌ها
+          title: پاک کردن تمام داده‌ها
+        title: منطقهٔ خطر
+      index:
+        disabled:
+          get_started: آغاز به کار
+        title: خبرنامه‌های رایانامه‌ای
+      roles:
+        accounts: حساب ها
+        edit_role: ویرایش نقش
+        empty:
+          hint: هیچ‌کس اجازهٔ استفاده از این ویژگی را ندارد.
+          no_roles_added: هیچ نقشی اضافه نشد
+        manage_roles: مدیریت نقش‌ها
+        role_name: نام نقش
+        title: نقش‌ها
+      setups:
+        show:
+          enable_feature: به کار انداختن ویژگی
+          important_information: اطّلاعات مهم
+>>>>>>> refs/remotes/origin/main
     export_domain_allows:
       new:
         title: درون‌ریزی اجازه‌های دامنه
@@ -1406,6 +1465,13 @@ fa:
   edit_profile:
     other: سایر
   email_subscription_mailer:
+<<<<<<< HEAD
+=======
+    confirmation:
+      action: تأیید نشانی رایانامه
+      subject: تأیید نشانی رایانامه‌تان
+      title: گرفتن به‌روز رسانی‌های رایانامه‌ای از %{name}؟
+>>>>>>> refs/remotes/origin/main
     notification:
       create_account: ایجاد حساب ماستودون
       subject:

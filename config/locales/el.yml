@@ -345,6 +345,12 @@ el:
       updated_msg: Επιτυχής ενημέρωση ανακοίνωσης!
     collections:
       accounts: Λογαριασμοί
+      back_to_account: Πίσω στη σελίδα λογαριασμού
+      back_to_report: Πίσω στη σελίδα αναφοράς
+      batch:
+        add_to_report: 'Προσθήκη στην αναφορά #%{id}'
+        remove_from_report: Αφαίρεση από την αναφορά
+        report: Αναφορά
       collection_title: Συλλογή από %{name}
       contents: Περιεχόμενα
       number_of_accounts:

@@ -5,7 +5,14 @@ import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 
 import MoodIcon from '@/material-icons/400-24px/mood.svg?react';
-import { HoverableEmoji } from 'flavours/glitch/components/status_reactions';
+
+import { Emoji } from 'flavours/glitch/components/emoji';
+import {
+  AnimateEmojiProvider,
+  CustomEmojiProvider,
+} from 'flavours/glitch/components/emoji/context';
+import type { ExtraCustomEmojiMap } from 'flavours/glitch/features/emoji/types';
+import { isUnicodeEmoji } from 'flavours/glitch/features/emoji/utils';
 import type { NotificationGroupReaction } from 'flavours/glitch/models/notification_group';
 import { useAppSelector } from 'flavours/glitch/store';
 
@@ -27,6 +34,7 @@ export const NotificationReaction: React.FC<{
     (displayedName, total, seeMoreHref) => {
       if (total === 1)
         return (
+<<<<<<< HEAD
           <FormattedMessage
             id='notification.reaction'
             defaultMessage='{name} reacted to your post <e>with</e>'
@@ -47,6 +55,28 @@ export const NotificationReaction: React.FC<{
                 ),
             }}
           />
+=======
+          <AnimateEmojiProvider>
+            <FormattedMessage
+              id='notification.reaction'
+              defaultMessage='{name} reacted to your post <e>with</e>'
+              values={{
+                name: displayedName,
+                e: (chunks) =>
+                  notification.reaction ? (
+                    <>
+                      {chunks}{' '}
+                      <CustomEmojiProvider emojis={custom}>
+                        <Emoji code={code} />
+                      </CustomEmojiProvider>
+                    </>
+                  ) : (
+                    ''
+                  ),
+              }}
+            />
+          </AnimateEmojiProvider>
+>>>>>>> refs/remotes/origin/main
         );
 
       return (

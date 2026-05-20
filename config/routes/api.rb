@@ -30,6 +30,7 @@ namespace :api, format: false do
         resources :favourited_by, controller: :favourited_by_accounts, only: :index
         resources :reactions, controller: :reactions, only: :index
         resource :reblog, only: :create
+        resource :context, only: :show
         post :unreblog, to: 'reblogs#destroy'
 
         resources :quotes, only: :index do
@@ -64,10 +65,6 @@ namespace :api, format: false do
 
         post :sticky, to: 'stickies#create'
         post :unsticky, to: 'stickies#destroy'
-      end
-
-      member do
-        get :context
       end
     end
 
