@@ -8,11 +8,11 @@ import ImmutablePureComponent from 'react-immutable-pure-component';
 import CheckIcon from '@/material-icons/400-24px/check.svg?react';
 import CloseIcon from '@/material-icons/400-24px/close.svg?react';
 
-import { AccountBio } from '@/flavours/glitch/components/account_bio';
 import { Avatar } from '@/flavours/glitch/components/avatar';
 import { DisplayName } from '@/flavours/glitch/components/display_name';
 import { IconButton } from '@/flavours/glitch/components/icon_button';
 import { injectIntl } from '@/flavours/glitch/components/intl';
+import { EmojiHTML } from '@/flavours/glitch/components/emoji/html';
 import { Permalink } from '@/flavours/glitch/components/permalink';
 
 const messages = defineMessages({
@@ -40,7 +40,11 @@ class AccountAuthorize extends ImmutablePureComponent {
             <DisplayName account={account} />
           </Permalink>
 
-          <AccountBio accountId={account.id} />
+          <EmojiHTML
+            className='account__header__content translate'
+            htmlString={account.get('note_emojified')}
+            extraEmojis={account.get('emojis')}
+          />
         </div>
 
         <div className='account--panel'>

@@ -1,8 +1,7 @@
 import { defineMessages, useIntl } from 'react-intl';
 
+import { Helmet } from 'react-helmet';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
-
-import { Helmet } from '@unhead/react/helmet';
 
 import { TabLink, TabList } from '@/flavours/glitch/components/tab_list';
 import { Column } from 'flavours/glitch/components/column';

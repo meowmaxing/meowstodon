@@ -30,7 +30,6 @@ interface AccountListProps {
   list?: AccountList | null;
   loadMore: () => void;
   prependAccountId?: string | null;
-  withoutFollowsYouBadge?: boolean;
   scrollKey: string;
 }
 
@@ -43,7 +42,6 @@ export const AccountList: FC<AccountListProps> = ({
   list,
   loadMore,
   prependAccountId,
-  withoutFollowsYouBadge,
   scrollKey,
 }) => {
   const account = useAccount(accountId);
@@ -61,7 +59,6 @@ export const AccountList: FC<AccountListProps> = ({
           key={followerId}
           accountId={followerId}
           withBio={false}
-          badge={withoutFollowsYouBadge ? false : null}
         />
       )) ?? [];
 
@@ -71,12 +68,11 @@ export const AccountList: FC<AccountListProps> = ({
           key={prependAccountId}
           accountId={prependAccountId}
           withBio={false}
-          badge={withoutFollowsYouBadge ? false : null}
         />,
       );
     }
     return children;
-  }, [prependAccountId, list, forceEmptyState, withoutFollowsYouBadge]);
+  }, [prependAccountId, list, forceEmptyState]);
 
   const columnRef = useRef<ColumnRef>(null);
   const handleHeaderClick = useCallback(() => {

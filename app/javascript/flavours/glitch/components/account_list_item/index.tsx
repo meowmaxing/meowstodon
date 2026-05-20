@@ -93,7 +93,7 @@ export const AccountListItem: React.FC<Props> = ({
         <ListItemLink
           to={`/@${account.acct}`}
           data-hover-card-account={accountId}
-          subtitle={<span className={classes.handle}>{handle}</span>}
+          subtitle={handle}
         >
           <DisplayNameSimple
             account={account}

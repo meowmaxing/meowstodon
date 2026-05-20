@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 
 import { defineMessages, FormattedMessage, useIntl } from 'react-intl';
 
+import { Helmet } from 'react-helmet';
 import {
   Switch,
   Route,
@@ -10,8 +11,6 @@ import {
   matchPath,
   useLocation,
 } from 'react-router-dom';
-
-import { Helmet } from '@unhead/react/helmet';
 
 import { Callout } from '@/flavours/glitch/components/callout';
 import { useCurrentAccountId } from '@/flavours/glitch/hooks/useAccountId';

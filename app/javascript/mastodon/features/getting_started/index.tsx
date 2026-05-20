@@ -1,6 +1,6 @@
 import { useIntl } from 'react-intl';
 
-import { Helmet } from '@unhead/react/helmet';
+import { Helmet } from 'react-helmet';
 
 import { Column } from 'mastodon/components/column';
 

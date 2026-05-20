@@ -33,7 +33,6 @@ import StatusIcons from './status_icons';
 import StatusPrepend from './status_prepend';
 import { StatusReactions } from './status_reactions';
 import { CollectionPreviewCard } from '../features/collections/components/collection_preview_card';
-import { compareUrls } from '../utils/compare_urls';
 
 const domParser = new DOMParser();
 
@@ -657,7 +656,7 @@ class Status extends ImmutablePureComponent {
         status.get('tagged_collections')
       ).find((item) => compareUrls(item.get('url'), cardUrl));
       if (taggedCollection) {
-        media.push(<CollectionPreviewCard collection={taggedCollection.toJS()} />);
+        media.push(<CollectionPreviewCard collection={taggedCollection} />);
       } else {
         media.push(
           <Card
@@ -788,8 +787,12 @@ class Status extends ImmutablePureComponent {
             {!expanded && <MentionsPlaceholder status={status} />}
 
             <StatusReactions
-              id={status.get('id')}
-              reactions={status.get('reactions').toArray()}
+              statusId={status.get('id')}
+              reactions={status.get('reactions')}
+              numVisible={visibleReactions}
+              addReaction={this.props.onReactionAdd}
+              removeReaction={this.props.onReactionRemove}
+              canReact={this.props.identity.signedIn}
             />
 
             {(showActions && !isQuotedPost) &&

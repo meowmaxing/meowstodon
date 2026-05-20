@@ -24,7 +24,6 @@ import Column from '@/mastodon/features/ui/components/column';
 import { useAccount } from '@/mastodon/hooks/useAccount';
 import { useAccountId } from '@/mastodon/hooks/useAccountId';
 import { useAccountVisibility } from '@/mastodon/hooks/useAccountVisibility';
-import { me } from '@/mastodon/initial_state';
 import { useAppDispatch, useAppSelector } from '@/mastodon/store';
 import AddIcon from '@/material-icons/400-24px/add.svg?react';
 
@@ -174,14 +173,12 @@ const AccountFeatured: React.FC<{ multiColumn: boolean }> = ({
                   defaultMessage='Collections'
                 />
               </h2>
-              {accountId === me && (
-                <SubheadingLink to='/collections/new' icon={AddIcon}>
-                  <FormattedMessage
-                    id='account.featured.new_collection'
-                    defaultMessage='New collection'
-                  />
-                </SubheadingLink>
-              )}
+              <SubheadingLink to='/collections/new' icon={AddIcon}>
+                <FormattedMessage
+                  id='account.featured.new_collection'
+                  defaultMessage='New collection'
+                />
+              </SubheadingLink>
             </Subheading>
             {hasCollections ? (
               <ItemList>

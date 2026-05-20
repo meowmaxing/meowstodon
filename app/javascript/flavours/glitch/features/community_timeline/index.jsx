@@ -3,7 +3,7 @@ import { PureComponent } from 'react';
 
 import { defineMessages, FormattedMessage } from 'react-intl';
 
-import { Helmet } from '@unhead/react/helmet';
+import { Helmet } from 'react-helmet';
 
 import { connect } from 'react-redux';
 

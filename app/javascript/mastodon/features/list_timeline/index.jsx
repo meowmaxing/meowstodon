@@ -3,7 +3,7 @@ import { PureComponent } from 'react';
 
 import { FormattedMessage } from 'react-intl';
 
-import { Helmet } from '@unhead/react/helmet';
+import { Helmet } from 'react-helmet';
 import { Link, withRouter } from 'react-router-dom';
 
 import ImmutablePropTypes from 'react-immutable-proptypes';

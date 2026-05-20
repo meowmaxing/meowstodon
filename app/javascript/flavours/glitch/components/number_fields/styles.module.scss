@@ -1,11 +1,9 @@
 .list {
-  --_item-gap: var(--number-fields-gap, 24px);
-
   display: flex;
   flex-wrap: wrap;
   margin: 0;
   padding: 0;
-  gap: 4px var(--_item-gap);
+  gap: 4px 24px;
   font-size: 13px;
   color: var(--color-text-secondary);
 }

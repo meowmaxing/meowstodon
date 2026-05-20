@@ -1,4 +1,3 @@
-import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import { Globals } from '@react-spring/web';
@@ -34,11 +33,7 @@ function main() {
     await initializeEmoji();
 
     const root = createRoot(mountNode);
-    root.render(
-      <StrictMode>
-        <Mastodon {...props} />
-      </StrictMode>,
-    );
+    root.render(<Mastodon {...props} />);
     store.dispatch(setupBrowserNotifications());
 
     if (isProduction() && me && 'serviceWorker' in navigator) {

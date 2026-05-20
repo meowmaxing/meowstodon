@@ -81,6 +81,8 @@ export const DetailedStatus: React.FC<{
   pictureInPicture,
   onToggleMediaVisibility,
   onToggleHidden,
+  onReactionAdd,
+  onReactionRemove,
   ancestors = 0,
   multiColumn = false,
   expanded,
@@ -308,7 +310,7 @@ export const DetailedStatus: React.FC<{
       );
 
     if (taggedCollection) {
-      media = <CollectionPreviewCard collection={taggedCollection.toJS()} />;
+      media = <CollectionPreviewCard collection={taggedCollection} />;
     } else {
       media = (
         <Card
@@ -543,8 +545,11 @@ export const DetailedStatus: React.FC<{
 
         {!!visibleReactions && (
           <StatusReactions
-            id={status.get('id')}
-            reactions={status.get('reactions').toArray()}
+            statusId={status.get('id')}
+            reactions={status.get('reactions')}
+            addReaction={onReactionAdd}
+            removeReaction={onReactionRemove}
+            canReact={signedIn}
           />
         )}
 

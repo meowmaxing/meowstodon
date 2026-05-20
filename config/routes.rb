@@ -189,7 +189,6 @@ Rails.application.routes.draw do
   namespace :redirect do
     resources :accounts, only: :show
     resources :statuses, only: :show
-    resources :collections, only: :show
   end
 
   namespace :email_subscriptions do

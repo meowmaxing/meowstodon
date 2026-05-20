@@ -7,5 +7,4 @@ export interface ApiStatusReactionJSON {
   url?: string | undefined;
   count?: number;
   account?: ApiAccountJSON;
-  me?: boolean;
 }
