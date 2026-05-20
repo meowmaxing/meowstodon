@@ -1,10 +1,8 @@
-import { useCallback, useMemo, useRef } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 
 import { defineMessages, FormattedMessage, useIntl } from 'react-intl';
 
 import { PendingBadge } from '@/mastodon/components/badge';
-import { SelectField } from '@/mastodon/components/form_fields';
-import { useSearchParam } from '@/mastodon/hooks/useSearchParam';
 import VisibilityOffIcon from '@/material-icons/400-24px/visibility_off.svg?react';
 import type {
   ApiCollectionJSON,
@@ -16,6 +14,7 @@ import {
   AccountListItemFollowButton,
 } from 'mastodon/components/account_list_item';
 import { Button } from 'mastodon/components/button';
+import { Callout } from 'mastodon/components/callout';
 import {
   Article,
   ItemList,
@@ -36,6 +35,50 @@ const messages = defineMessages({
   },
 });
 
+const SensitiveScreen: React.FC<{
+  sensitive: boolean | undefined;
+  focusTargetRef: React.RefObject<HTMLHeadingElement>;
+  children: React.ReactNode;
+}> = ({ sensitive, focusTargetRef, children }) => {
+  const [isVisible, setIsVisible] = useState(!sensitive);
+
+  const showAnyway = useCallback(() => {
+    setIsVisible(true);
+    setTimeout(() => {
+      focusTargetRef.current?.focus();
+    }, 0);
+  }, [focusTargetRef]);
+
+  if (isVisible) {
+    return children;
+  }
+
+  return (
+    <Callout
+      variant='warning'
+      title={
+        <FormattedMessage
+          id='collections.detail.sensitive_content'
+          defaultMessage='Sensitive content'
+        />
+      }
+      primaryLabel={
+        <FormattedMessage
+          id='content_warning.show_short'
+          defaultMessage='Show'
+        />
+      }
+      onPrimary={showAnyway}
+      className={classes.sensitiveScreen}
+    >
+      <FormattedMessage
+        id='collections.detail.sensitive_note'
+        defaultMessage='The description and accounts may not be suitable for all viewers.'
+      />
+    </Callout>
+  );
+};
+
 type CollectionItemWithAccount = CollectionAccountItem & {
   account?: Account | null;
 };
@@ -55,43 +98,6 @@ const getCollectionItems = createAppSelector(
     ),
 );
 
-function sortAccounts(
-  accounts: CollectionItemWithAccount[],
-  sortBy?: string,
-): CollectionItemWithAccount[] {
-  if (!sortBy || sortBy === 'date_added') {
-    return accounts;
-  }
-
-  const sorted = [...accounts];
-
-  switch (sortBy) {
-    case 'alphabetical':
-      return sorted.sort((a, b) => {
-        const nameA = a.account?.display_name ?? '';
-        const nameB = b.account?.display_name ?? '';
-        return nameA.localeCompare(nameB);
-      });
-
-    case 'last_active':
-      return sorted.sort((a, b) => {
-        const dateA = a.account?.last_status_at ?? '';
-        const dateB = b.account?.last_status_at ?? '';
-        return new Date(dateB).getTime() - new Date(dateA).getTime();
-      });
-
-    case 'most_followers':
-      return sorted.sort((a, b) => {
-        const followersA = a.account?.followers_count ?? 0;
-        const followersB = b.account?.followers_count ?? 0;
-        return followersB - followersA;
-      });
-
-    default:
-      return accounts;
-  }
-}
-
 export const CollectionAccountsList: React.FC<{
   collection: ApiCollectionJSON;
 }> = ({ collection }) => {
@@ -107,20 +113,11 @@ export const CollectionAccountsList: React.FC<{
     getCollectionItems(state, id),
   );
 
-  const [sortBy, setSortBy] = useSearchParam('sort', 'date_added');
-  const changeSortBy = useCallback(
-    (event: React.ChangeEvent<HTMLSelectElement>) => {
-      setSortBy(event.target.value);
-    },
-    [setSortBy],
-  );
-  const sortedAccounts = sortAccounts(collectionAccounts, sortBy);
-
   const { visibleAccounts, hiddenAccounts } = useMemo(() => {
     const visibleAccounts: CollectionItemWithAccount[] = [];
     const hiddenAccounts: CollectionItemWithAccount[] = [];
 
-    sortedAccounts.forEach((item) => {
+    collectionAccounts.forEach((item) => {
       const { account, account_id } = item;
 
       if (!isOwnCollection && !account) {
@@ -137,7 +134,7 @@ export const CollectionAccountsList: React.FC<{
     });
 
     return { visibleAccounts, hiddenAccounts };
-  }, [sortedAccounts, isOwnCollection, relationships]);
+  }, [collectionAccounts, isOwnCollection, relationships]);
 
   const renderAccountItemButton = useCallback(
     ({ relationship, accountId }: RenderButtonOptions) => {
@@ -191,81 +188,46 @@ export const CollectionAccountsList: React.FC<{
 
   return (
     <>
-      <div className={classes.subheadingWithSelect}>
-        <h3
-          className={classes.columnSubheading}
-          tabIndex={-1}
-          ref={listHeadingRef}
-        >
-          <FormattedMessage
-            id='collections.account_count'
-            defaultMessage='{count, plural, one {# account} other {# accounts}}'
-            values={{ count: collection.item_count }}
-          />
-        </h3>
-        <SelectField
-          label={
-            <FormattedMessage
-              id='collections.sort_by'
-              defaultMessage='Sort by:'
-            />
-          }
-          value={sortBy}
-          onChange={changeSortBy}
-          inputPlacement='inline-end'
-          className={classes.select}
-          wrapperClassName={classes.selectWrapper}
-        >
-          <option value='alphabetical'>
-            <FormattedMessage
-              id='collections.sort_alphabetical'
-              defaultMessage='Alphabetical'
-            />
-          </option>
-          <option value='last_active'>
-            <FormattedMessage
-              id='collections.sort_last_active'
-              defaultMessage='Last active'
-            />
-          </option>
-          <option value='most_followers'>
-            <FormattedMessage
-              id='collections.sort_most_followers'
-              defaultMessage='Most followers'
-            />
-          </option>
-          <option value='date_added'>
-            <FormattedMessage
-              id='collections.sort_date_added'
-              defaultMessage='Date added'
-            />
-          </option>
-        </SelectField>
-      </div>
-      <ItemList emptyMessage={intl.formatMessage(messages.empty)}>
-        <TruncatedListItems
-          visibleItems={visibleAccounts}
-          truncatedItems={hiddenAccounts}
-          toggleButton={{
-            icon: VisibilityOffIcon,
-            title: (
-              <FormattedMessage
-                id='collections.hidden_accounts_link'
-                defaultMessage='{count, plural, one {# hidden account} other {# hidden accounts}}'
-                values={{ count: hiddenAccounts.length }}
-              />
-            ),
-            subtitle: (
-              <FormattedMessage
-                id='collections.hidden_accounts_description'
-                defaultMessage='You’ve blocked or muted {count, plural, one {this user} other {these users}}'
-                values={{ count: hiddenAccounts.length }}
-              />
-            ),
-          }}
-          renderListItem={renderListItem}
+      <h3
+        className={classes.columnSubheading}
+        tabIndex={-1}
+        ref={listHeadingRef}
+      >
+        <FormattedMessage
+          id='collections.account_count'
+          defaultMessage='{count, plural, one {# account} other {# accounts}}'
+          values={{ count: collection.item_count }}
         />
-      </ItemList>
+      </h3>
+      <SensitiveScreen
+        sensitive={!isOwnCollection && collection.sensitive}
+        focusTargetRef={listHeadingRef}
+      >
+        <ItemList emptyMessage={intl.formatMessage(messages.empty)}>
+          <TruncatedListItems
+            visibleItems={visibleAccounts}
+            truncatedItems={hiddenAccounts}
+            toggleButton={{
+              icon: VisibilityOffIcon,
+              title: (
+                <FormattedMessage
+                  id='collections.hidden_accounts_link'
+                  defaultMessage='{count, plural, one {# hidden account} other {# hidden accounts}}'
+                  values={{ count: hiddenAccounts.length }}
+                />
+              ),
+              subtitle: (
+                <FormattedMessage
+                  id='collections.hidden_accounts_description'
+                  defaultMessage='You’ve blocked or muted {count, plural, one {this user} other {these users}}'
+                  values={{ count: hiddenAccounts.length }}
+                />
+              ),
+            }}
+            renderListItem={renderListItem}
+          />
+        </ItemList>
+      </SensitiveScreen>
     </>
   );
 };

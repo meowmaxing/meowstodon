@@ -67,14 +67,9 @@ interface LinkProps
   extends React.ComponentPropsWithoutRef<typeof Link>, ContentProps {}
 
 export const ListItemLink = polymorphicForwardRef<'h3', LinkProps>(
-  ({ as, subtitle, subtitleId, children, className, ...otherProps }, ref) => {
+  ({ as, subtitle, children, className, ...otherProps }, ref) => {
     return (
-      <ListItemContent
-        ref={ref}
-        as={as}
-        subtitle={subtitle}
-        subtitleId={subtitleId}
-      >
+      <ListItemContent ref={ref} as={as} subtitle={subtitle}>
         <Link className={classNames(className, 'focusable')} {...otherProps}>
           {children}
         </Link>
@@ -87,14 +82,9 @@ interface ButtonProps
   extends React.ComponentPropsWithoutRef<'button'>, ContentProps {}
 
 export const ListItemButton = polymorphicForwardRef<'h3', ButtonProps>(
-  ({ as, subtitle, subtitleId, children, className, ...otherProps }, ref) => {
+  ({ as, subtitle, children, className, ...otherProps }, ref) => {
     return (
-      <ListItemContent
-        as={as}
-        ref={ref}
-        subtitle={subtitle}
-        subtitleId={subtitleId}
-      >
+      <ListItemContent as={as} ref={ref} subtitle={subtitle}>
         <button
           type='button'
           className={classNames(className, 'focusable')}

@@ -16,8 +16,6 @@ module Admin
       @report_notes = @report.notes.chronological.includes(:account)
       @action_logs  = @report.history.includes(:target)
       @form         = Admin::StatusBatchAction.new
-      @collection_form = Admin::CollectionBatchAction.new
-      @collections  = @report.collections
       @statuses     = @report.statuses.with_includes
     end
 
