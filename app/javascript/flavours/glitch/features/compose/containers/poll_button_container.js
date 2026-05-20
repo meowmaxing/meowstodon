@@ -4,7 +4,8 @@ import { addPoll, removePoll } from '../../../actions/compose';
 import PollButton from '../components/poll_button';
 
 const mapStateToProps = state => {
-  const hasAttachments = !!state.compose.get('is_uploading');
+  const readyAttachmentsSize = state.compose.get('media_attachments').size ?? 0;
+  const hasAttachments = readyAttachmentsSize > 0 || !!state.compose.get('is_uploading');
   const hasQuote = !!state.compose.get('quoted_status_id');
 
   return ({

@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 
 import PhotoLibraryIcon from '@/material-icons/400-20px/photo_library.svg?react';
 import BrushIcon from '@/material-icons/400-24px/brush.svg?react';
-import GifBoxIcon from '@/material-icons/400-24px/gif_box.svg?react';
 import UploadFileIcon from '@/material-icons/400-24px/upload_file.svg?react';
 
 import { injectIntl } from '@/flavours/glitch/components/intl';
@@ -18,13 +17,11 @@ import { DropdownIconButton } from './dropdown_icon_button';
 const messages = defineMessages({
   upload: { id: 'upload_button.label', defaultMessage: 'Add images, a video or an audio file' },
   doodle: { id: 'compose.attach.doodle', defaultMessage: 'Draw something' },
-  gif:    { id: 'compose.attach.gif', defaultMessage: 'Upload GIF' },
 });
 
 const makeMapStateToProps = () => {
   const mapStateToProps = state => ({
     acceptContentTypes: state.getIn(['media_attachments', 'accept_content_types']),
-    supportsGif: state.getIn(['server', 'server', 'configuration', 'gif_search', 'enabled']),
   });
 
   return mapStateToProps;
@@ -36,13 +33,9 @@ class UploadButton extends ImmutablePureComponent {
     disabled: PropTypes.bool,
     onSelectFile: PropTypes.func.isRequired,
     onDoodleOpen: PropTypes.func.isRequired,
-    onEmbedGif: PropTypes.func.isRequired,
-    onModalClose: PropTypes.func.isRequired,
-    onModalOpen: PropTypes.func.isRequired,
     style: PropTypes.object,
     resetFileKey: PropTypes.number,
     acceptContentTypes: ImmutablePropTypes.listOf(PropTypes.string).isRequired,
-    supportsGif: PropTypes.bool.isRequired,
     intl: PropTypes.object.isRequired,
   };
 
@@ -55,10 +48,8 @@ class UploadButton extends ImmutablePureComponent {
   handleSelect = (value) => {
     if (value === 'upload') {
       this.fileElement.click();
-    } else if (value === 'doodle') {
+    } else {
       this.props.onDoodleOpen();
-    } else if (value === 'gif') {
-      this.props.onEmbedGif();
     }
   };
 
@@ -67,7 +58,7 @@ class UploadButton extends ImmutablePureComponent {
   };
 
   render () {
-    const { intl, resetFileKey, disabled, acceptContentTypes, supportsGif } = this.props;
+    const { intl, resetFileKey, disabled, acceptContentTypes } = this.props;
 
     const message = intl.formatMessage(messages.upload);
 
@@ -83,17 +74,8 @@ class UploadButton extends ImmutablePureComponent {
         iconComponent: BrushIcon,
         value: 'doodle',
         text: intl.formatMessage(messages.doodle),
-      }
+      },
     ];
-
-    if (supportsGif) {
-      options.push({
-        icon: 'gif-box',
-        iconComponent: GifBoxIcon,
-        value: 'gif',
-        text: intl.formatMessage(messages.gif),
-      });
-    }
 
     return (
       <div className='compose-form__upload-button'>

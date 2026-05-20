@@ -68,7 +68,6 @@ export interface BaseApiAccountJSON {
   moved?: ApiAccountJSON;
   suspended?: boolean;
   limited?: boolean;
-  remote_limit_reason?: string;
   memorial?: boolean;
   hide_collections: boolean;
   email_subscriptions?: boolean;

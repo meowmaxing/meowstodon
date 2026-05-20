@@ -34,12 +34,7 @@ export const BaseEmptyMessage: FC<BaseEmptyMessageProps> = ({
   }
 
   if (hidden) {
-    return (
-      <LimitedAccountHint
-        accountId={account.id}
-        reason={account.remote_limit_reason}
-      />
-    );
+    return <LimitedAccountHint accountId={account.id} />;
   }
 
   if (blockedBy) {

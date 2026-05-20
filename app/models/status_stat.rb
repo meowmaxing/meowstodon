@@ -7,7 +7,6 @@
 #  id                         :bigint(8)        not null, primary key
 #  favourites_count           :bigint(8)        default(0), not null
 #  quotes_count               :bigint(8)        default(0), not null
-#  reactions_count            :bigint(8)        default(0), not null
 #  reblogs_count              :bigint(8)        default(0), not null
 #  replies_count              :bigint(8)        default(0), not null
 #  untrusted_favourites_count :bigint(8)
@@ -34,10 +33,6 @@ class StatusStat < ApplicationRecord
 
   def favourites_count
     [attributes['favourites_count'], 0].max
-  end
-
-  def reactions_count
-    [attributes['reactions_count'], 0].max
   end
 
   def quotes_count

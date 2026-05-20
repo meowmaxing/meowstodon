@@ -71,12 +71,6 @@ export const COMPOSE_UPLOAD_CHANGE_FAIL        = 'COMPOSE_UPLOAD_UPDATE_FAIL';
 
 export const COMPOSE_DOODLE_SET        = 'COMPOSE_DOODLE_SET';
 
-export const COMPOSE_GIF_RESET = 'COMPOSE_GIF_RESET';
-
-export const COMPOSE_GIF_SEARCH_REQUEST = 'COMPOSE_GIF_SEARCH_REQUEST';
-export const COMPOSE_GIF_SEARCH_SUCCESS = 'COMPOSE_GIF_SEARCH_SUCCESS';
-export const COMPOSE_GIF_SEARCH_FAIL    = 'COMPOSE_GIF_SEARCH_FAIL';
-
 export const COMPOSE_POLL_ADD             = 'COMPOSE_POLL_ADD';
 export const COMPOSE_POLL_REMOVE          = 'COMPOSE_POLL_REMOVE';
 export const COMPOSE_POLL_OPTION_ADD      = 'COMPOSE_POLL_OPTION_ADD';
@@ -95,6 +89,7 @@ export const COMPOSE_FOCUS = 'COMPOSE_FOCUS';
 
 const messages = defineMessages({
   uploadErrorLimit: { id: 'upload_error.limit', defaultMessage: 'File upload limit exceeded.' },
+  uploadErrorPoll:  { id: 'upload_error.poll', defaultMessage: 'File upload not allowed with polls.' },
   uploadQuote: { id: 'upload_error.quote', defaultMessage: 'File upload not allowed with quotes.' },
   open: { id: 'compose.published.open', defaultMessage: 'Open' },
   published: { id: 'compose.published.body', defaultMessage: 'Post published.' },
@@ -360,47 +355,7 @@ export function doodleSet(options) {
   };
 }
 
-export function resetGifs() {
-  return {
-    type: COMPOSE_GIF_RESET,
-  };
-}
-
-export const gifSearch = query => (dispatch) => {
-  dispatch(gifSearchRequest(query));
-
-  api().get(`/api/v1/gifs`, { params: { q: query } }).then(response => {
-    dispatch(gifSearchSuccess(query, response.data));
-  }).catch(error => {
-    dispatch(gifSearchFail(query, error));
-  });
-};
-
-export function gifSearchRequest(query) {
-  return {
-    type: COMPOSE_GIF_SEARCH_REQUEST,
-    query,
-  };
-}
-
-export function gifSearchSuccess(query, data) {
-  return {
-    type: COMPOSE_GIF_SEARCH_SUCCESS,
-    query,
-    results: data.results,
-    provider: data.provider,
-  };
-}
-
-export function gifSearchFail(query, error) {
-  return {
-    type: COMPOSE_GIF_SEARCH_FAIL,
-    query,
-    error,
-  };
-}
-
-export function uploadCompose(files, alt = '') {
+export function uploadCompose(files) {
   return function (dispatch, getState) {
     // Exit if there's a quote.
     if (getState().compose.get('quoted_status_id')) {
@@ -419,6 +374,11 @@ export function uploadCompose(files, alt = '') {
       return;
     }
 
+    if (getState().getIn(['compose', 'poll'])) {
+      dispatch(showAlert({ message: messages.uploadErrorPoll }));
+      return;
+    }
+
     dispatch(uploadComposeRequest());
 
     for (const [i, file] of Array.from(files).entries()) {
@@ -426,7 +386,6 @@ export function uploadCompose(files, alt = '') {
 
       const data = new FormData();
       data.append('file', file);
-      data.append('description', alt);
 
       api().post('/api/v2/media', data, {
         onUploadProgress: function({ loaded }){

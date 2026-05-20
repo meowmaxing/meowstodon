@@ -107,8 +107,7 @@ export const AccountGallery: React.FC<{
     withReplies,
   } = useAppSelector((state) => selectGalleryTimeline(state, accountId));
 
-  const { suspended, blockedBy, hidden, limitReason } =
-    useAccountVisibility(accountId);
+  const { suspended, blockedBy, hidden } = useAccountVisibility(accountId);
 
   const maxId = attachments.last()?.getIn(['status', 'id']) as
     | string
@@ -192,9 +191,7 @@ export const AccountGallery: React.FC<{
         />
       );
     } else if (hidden) {
-      emptyMessage = (
-        <LimitedAccountHint accountId={accountId} reason={limitReason} />
-      );
+      emptyMessage = <LimitedAccountHint accountId={accountId} />;
     } else if (blockedBy) {
       emptyMessage = (
         <FormattedMessage

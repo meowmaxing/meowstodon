@@ -17,14 +17,6 @@ import { formatTime } from 'flavours/glitch/features/video';
 
 import { autoPlayGif, displayMedia, useBlurhash } from '../initial_state';
 
-const colCount = function(size) {
-  return Math.max(Math.ceil(Math.sqrt(size)), 2);
-};
-
-const rowCount = function(size) {
-  return Math.ceil(size / colCount(size));
-};
-
 class Item extends PureComponent {
 
   static propTypes = {
@@ -102,18 +94,14 @@ class Item extends PureComponent {
     let badges = [], thumbnail;
 
     let width  = 50;
-    let height = 50;
+    let height = 100;
 
-    const cols = colCount(size);
-    const remaining = (-size % cols + cols) % cols;
-    const largeCount = Math.floor(remaining / 3); // width=2, height=2
-    const mediumCount = remaining % 3; // height=2
-
-    if (size === 1 || index < largeCount) {
+    if (size === 1) {
       width = 100;
-      height = 100;
-    } else if (size === 2 || index < largeCount + mediumCount) {
-      height = 100;
+    }
+
+    if (size === 4 || (size === 3 && index > 0)) {
+      height = 50;
     }
 
     const description = attachment.getIn(['translation', 'description']) || attachment.get('description');
@@ -341,11 +329,6 @@ class MediaGallery extends PureComponent {
     if (this.isStandaloneEligible()) { // TODO: cropImages setting
       style.aspectRatio = `${this.props.media.getIn([0, 'meta', 'small', 'aspect'])}`;
     } else {
-      const cols = colCount(media.size);
-      const rows = rowCount(media.size);
-      style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
-      style.gridTemplateRows = `repeat(${rows}, 1fr)`;
-
       style.aspectRatio = '16 / 9';
     }
 

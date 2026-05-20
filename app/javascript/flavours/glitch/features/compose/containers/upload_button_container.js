@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
 
 import { uploadCompose } from '../../../actions/compose';
-import { openModal, closeModal } from '../../../actions/modal';
+import { openModal } from '../../../actions/modal';
 import UploadButton from '../components/upload_button';
 
 const mapStateToProps = state => {
+  const isPoll = state.getIn(['compose', 'poll']) !== null;
   const isUploading = state.getIn(['compose', 'is_uploading']);
   const readyAttachmentsSize = state.getIn(['compose', 'media_attachments']).size ?? 0;
   const pendingAttachmentsSize = state.getIn(['compose', 'pending_media_attachments']).size ?? 0;
@@ -14,7 +15,7 @@ const mapStateToProps = state => {
   const hasQuote = !!state.compose.get('quoted_status_id');
 
   return {
-    disabled: isUploading || isOverLimit || hasVideoOrAudio || hasQuote,
+    disabled: isPoll || isUploading || isOverLimit || hasVideoOrAudio || hasQuote,
     resetFileKey: state.getIn(['compose', 'resetFileKey']),
   };
 };
@@ -30,24 +31,6 @@ const mapDispatchToProps = dispatch => ({
       modalType: 'DOODLE',
       modalProps: { noEsc: true, noClose: true },
     }));
-  },
-
-  onEmbedGif() {
-    dispatch(openModal({
-      modalType: 'GIF',
-      modalProps: { noEsc: true },
-    }));
-  },
-
-  onModalClose() {
-    dispatch(closeModal({
-      modalType: undefined,
-      ignoreFocus: false,
-    }));
-  },
-
-  onModalOpen(props) {
-    dispatch(openModal({ modalType: 'ACTIONS', modalProps: props }));
   },
 });
 

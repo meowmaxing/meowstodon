@@ -196,8 +196,7 @@
 .simple_form .overridden,
 .simple_form .recommended,
 .simple_form .not_recommended,
-.simple_form .glitch_only,
-.simple_form .chuckya_only {
+.simple_form .glitch_only {
   display: inline-block;
   padding: 4px 6px;
   cursor: default;
@@ -239,6 +238,7 @@
   border-color: var(--color-border-on-bg-warning-softer);
 }
 
+<<<<<<< HEAD
 .simple_form .chuckya_only {
   color: var(--color-text-brand-soft);
   background-color: var(--color-bg-brand-softer);
@@ -314,6 +314,8 @@
   }
 }
 
+=======
+>>>>>>> parent of a7dd983909 (Merge remote-tracking branch 'upstream')
 .directory__tag .trends__item__current {
   width: auto;
 }

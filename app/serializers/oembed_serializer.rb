@@ -37,7 +37,6 @@ class OEmbedSerializer < ActiveModel::Serializer
   DEFAULT_WIDTH = 400
 
   include RoutingHelper
-  include StatusesHelper
   include ActionView::Helpers::TagHelper
 
   attributes :type, :version, :author_name,
@@ -53,7 +52,7 @@ class OEmbedSerializer < ActiveModel::Serializer
   end
 
   def author_name
-    attachment_types(object)[:video].positive? ? status_description(object) : (object.account.display_name.presence || object.account.username)
+    object.account.display_name.presence || object.account.username
   end
 
   def author_url

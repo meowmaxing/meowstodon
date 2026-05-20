@@ -8,7 +8,6 @@ RSpec.describe PublicFeed do
   before do
     Setting.local_live_feed_access = 'public'
     Setting.remote_live_feed_access = 'public'
-    Setting.bubble_live_feed_access = 'public'
   end
 
   describe '#get' do

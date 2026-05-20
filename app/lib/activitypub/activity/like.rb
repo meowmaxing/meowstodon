@@ -1,21 +1,17 @@
 # frozen_string_literal: true
 
 class ActivityPub::Activity::Like < ActivityPub::Activity
-  CUSTOM_EMOJI_REGEX = /^:[^:]+:$/
-
   def perform
     original_status = status_from_uri(object_uri)
-    return if original_status.nil? || delete_arrived_first?(@json['id'])
 
-    return if maybe_process_embedded_reaction
-
-    return if @account.favourited?(original_status)
+    return if original_status.nil? || !original_status.account.local? || delete_arrived_first?(@json['id']) || @account.favourited?(original_status)
 
     favourite = original_status.favourites.create!(account: @account)
 
     LocalNotificationWorker.perform_async(original_status.account_id, favourite.id, 'Favourite', 'favourite') if original_status.account.local?
     Trends.statuses.register(original_status)
   end
+<<<<<<< HEAD
 
   # Some servers deliver reactions as likes with the emoji in content
   # Versions of Misskey before 12.1.0 specify emojis in _misskey_reaction instead, so we check both
@@ -42,4 +38,6 @@ class ActivityPub::Activity::Like < ActivityPub::Activity
   rescue ActiveRecord::RecordInvalid
     true
   end
+=======
+>>>>>>> parent of a7dd983909 (Merge remote-tracking branch 'upstream')
 end

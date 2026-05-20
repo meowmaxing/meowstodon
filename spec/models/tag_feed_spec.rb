@@ -6,7 +6,6 @@ RSpec.describe TagFeed do
   before do
     Setting.local_topic_feed_access = 'public'
     Setting.remote_topic_feed_access = 'public'
-    Setting.bubble_topic_feed_access = 'public'
   end
 
   describe '#get' do

@@ -46,7 +46,6 @@ import { useBreakpoint } from 'flavours/glitch/features/ui/hooks/useBreakpoint';
 import { useIdentity } from 'flavours/glitch/identity_context';
 import {
   localLiveFeedAccess,
-  bubbleLiveFeedAccess,
   remoteLiveFeedAccess,
   trendsEnabled,
   me,
@@ -310,16 +309,13 @@ export const NavigationPanel: React.FC<{ multiColumn?: boolean }> = ({
         )}
 
         {(canViewFeed(signedIn, permissions, localLiveFeedAccess) ||
-          canViewFeed(signedIn, permissions, bubbleLiveFeedAccess) ||
           canViewFeed(signedIn, permissions, remoteLiveFeedAccess)) && (
           <ColumnLink
             transparent
             to={
               canViewFeed(signedIn, permissions, localLiveFeedAccess)
                 ? '/public/local'
-                : canViewFeed(signedIn, permissions, bubbleLiveFeedAccess)
-                  ? '/public/bubble'
-                  : '/public/remote'
+                : '/public/remote'
             }
             icon='globe'
             iconComponent={PublicIcon}

@@ -83,7 +83,6 @@ gem 'scenic', '~> 1.7'
 gem 'sidekiq', '< 9'
 gem 'sidekiq-bulk', '~> 0.2.0'
 gem 'sidekiq-scheduler', '~> 6.0'
-gem 'sidekiq-undertaker', github: 'TheEssem/sidekiq-undertaker'
 gem 'sidekiq-unique-jobs', '> 8'
 gem 'simple_form', '~> 5.2'
 gem 'simple-navigation', '~> 4.4'
@@ -231,5 +230,3 @@ gem 'hcaptcha', '~> 7.1'
 gem 'mail', '~> 2.8'
 
 gem 'vite_rails', '~> 3.0.19'
-
-gem 'prism'

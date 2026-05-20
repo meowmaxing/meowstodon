@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/TheEssem/sidekiq-undertaker.git
-  revision: 0dcf15dd8062b3510484740a9fec345e7ef349c0
-  specs:
-    sidekiq-undertaker (1.8.0)
-      rubyzip (~> 3)
-      sidekiq (~> 8)
-
-GIT
   remote: https://github.com/mastodon/webpush.git
   revision: 9631ac63045cfabddacc69fc06e919b4c13eb913
   ref: 9631ac63045cfabddacc69fc06e919b4c13eb913
@@ -189,9 +181,9 @@ GEM
     css_parser (2.1.0)
       addressable
     csv (3.3.5)
-    database_cleaner-active_record (2.2.1)
+    database_cleaner-active_record (2.2.2)
       activerecord (>= 5.a)
-      database_cleaner-core (~> 2.0.0)
+      database_cleaner-core (~> 2.0)
     database_cleaner-core (2.0.1)
     date (3.5.1)
     debug (1.11.1)
@@ -1048,7 +1040,6 @@ DEPENDENCIES
   pghero
   playwright-ruby-client (= 1.59.1)
   premailer-rails
-  prism
   prometheus_exporter (~> 2.2)
   propshaft
   public_suffix (~> 7.0)
@@ -1083,7 +1074,6 @@ DEPENDENCIES
   sidekiq (< 9)
   sidekiq-bulk (~> 0.2.0)
   sidekiq-scheduler (~> 6.0)
-  sidekiq-undertaker!
   sidekiq-unique-jobs (> 8)
   simple-navigation (~> 4.4)
   simple_form (~> 5.2)

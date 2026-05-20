@@ -29,7 +29,6 @@
   /profile/(*any)
   /public
   /public/local
-  /public/bubble
   /public/remote
   /publish
   /search

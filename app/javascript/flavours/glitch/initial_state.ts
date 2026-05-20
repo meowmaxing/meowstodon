@@ -24,7 +24,6 @@ interface InitialStateMeta {
   limited_federation_mode: boolean;
   locale: string;
   mascot: string | null;
-  max_reactions: number;
   me?: string;
   moved_to_account_id?: string;
   owner?: string;
@@ -38,10 +37,8 @@ interface InitialStateMeta {
   source_url: string;
   streaming_api_base_url: string;
   local_live_feed_access: 'public' | 'authenticated' | 'disabled';
-  bubble_live_feed_access: 'public' | 'authenticated' | 'disabled';
   remote_live_feed_access: 'public' | 'authenticated' | 'disabled';
   local_topic_feed_access: 'public' | 'authenticated';
-  bubble_topic_feed_access: 'public' | 'authenticated' | 'disabled';
   remote_topic_feed_access: 'public' | 'authenticated' | 'disabled';
   title: string;
   show_trends: boolean;
@@ -49,7 +46,6 @@ interface InitialStateMeta {
   use_blurhash: boolean;
   use_pending_items?: boolean;
   version: string;
-  visible_reactions: number;
   sso_redirect: string;
   status_page_url: string;
   terms_of_service_enabled: boolean;
@@ -89,7 +85,6 @@ export interface InitialState {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   local_settings: any;
   max_feed_hashtags: number;
-  max_reactions: number;
   poll_limits: PollLimits;
 }
 
@@ -156,7 +151,6 @@ export const showTrends = getMeta('show_trends');
 export const singleUserMode = getMeta('single_user_mode');
 export const source_url = getMeta('source_url');
 export const localLiveFeedAccess = getMeta('local_live_feed_access');
-export const bubbleLiveFeedAccess = getMeta('bubble_live_feed_access');
 export const remoteLiveFeedAccess = getMeta('remote_live_feed_access');
 export const localTopicFeedAccess = getMeta('local_topic_feed_access');
 export const remoteTopicFeedAccess = getMeta('remote_topic_feed_access');
@@ -199,7 +193,3 @@ export const defaultContentType = getMeta('default_content_type');
 export function getAccessToken(): string | undefined {
   return getMeta('access_token');
 }
-
-// Chuckya-specific settings
-export const maxReactions = initialState?.max_reactions ?? 1;
-export const visibleReactions = getMeta('visible_reactions');

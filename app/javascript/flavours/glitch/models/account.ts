@@ -98,7 +98,6 @@ export const accountDefaultValues: AccountShape = {
   following_count: 0,
   statuses_count: 0,
   hidden: false,
-  remote_limit_reason: '',
   suspended: false,
   memorial: false,
   limited: false,
