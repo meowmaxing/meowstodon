@@ -33,37 +33,7 @@ export const AvatarOverlay: React.FC<Props> = ({
   const friendSrc = hovering
     ? friend?.get('avatar')
     : friend?.get('avatar_static');
-
-<<<<<<< HEAD
-  let overlayElement;
-  if (friendSrc) {
-    overlayElement = (
-      <div
-        className='account__avatar'
-        style={{ width: `${overlaySize}px`, height: `${overlaySize}px` }}
-        data-avatar-of={`@${friend?.get('acct')}`}
-      >
-        {friendSrc && (
-          <img
-            src={friendSrc}
-            alt={friend?.get('acct')}
-            onError={handleImgLoadError}
-          />
-        )}
-      </div>
-    );
-  } else {
-    overlayElement = (
-      <div className='account__emoji' data-emoji-name={emoji.name}>
-        <CustomEmojiProvider emojis={custom}>
-          <Emoji code={code} />
-        </CustomEmojiProvider>
-      </div>
-    );
-  }
-
-=======
->>>>>>> parent of a7dd983909 (Merge remote-tracking branch 'upstream')
+    
   return (
     <div
       className='account__avatar-overlay'
