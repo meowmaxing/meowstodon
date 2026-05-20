@@ -1,11 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 
-import {
-  apiGetContext,
-  apiSetQuotePolicy,
-  apiSticky,
-  apiUnsticky,
-} from 'flavours/glitch/api/statuses';
+import { apiGetContext, apiSetQuotePolicy } from 'flavours/glitch/api/statuses';
 import { createDataLoadingThunk } from 'flavours/glitch/store/typed_functions';
 
 import type { ApiQuotePolicy } from '../api_types/quotes';

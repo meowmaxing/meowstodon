@@ -56,7 +56,6 @@ class StatusIcons extends PureComponent {
 
     return (
       <div className='status__info__icons'>
-      	{status.get('sticky') && <span className={"sticky-token"}>STICKY</span>}
         {settings.get('language') && status.get('language') && <LanguageIcon language={status.get('language')} />}
         {settings.get('reply') && status.get('in_reply_to_id', null) !== null ? (
           <Icon

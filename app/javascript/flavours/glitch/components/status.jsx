@@ -136,7 +136,6 @@ class Status extends ImmutablePureComponent {
       available: PropTypes.bool,
     }),
     contextType: PropTypes.string,
-    onSticky: PropTypes.func,
     ...WithOptionalRouterPropTypes,
   };
 
@@ -746,7 +745,6 @@ class Status extends ImmutablePureComponent {
                 'status--is-quote': isQuotedPost,
                 'status--has-quote': !!status.get('quote'),
                 'status--highlighted-entry': this.props.shouldHighlightOnMount,
-                'status--sticky': !!status.get('sticky'),
               })
             }
             data-id={status.get('id')}

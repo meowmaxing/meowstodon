@@ -65,8 +65,6 @@ const messages = defineMessages({
   openOriginalPage: { id: 'account.open_original_page', defaultMessage: 'Open original page' },
   revokeQuote: { id: 'status.revoke_quote', defaultMessage: 'Remove my post from @{name}’s post' },
   quotePolicyChange: { id: 'status.quote_policy_change', defaultMessage: 'Change who can quote' },
-  sticky: { id: 'status.sticky.make_sticky', defaultMessage: 'Make this post globally sticky' },
-  unsticky: { id: 'status.sticky.unsticky', defaultMessage: 'Unsticky this post' }
 });
 
 const mapStateToProps = (state, { status }) => {
@@ -101,7 +99,6 @@ class StatusActionBar extends ImmutablePureComponent {
     onFilter: PropTypes.func,
     onAddFilter: PropTypes.func,
     onInteractionModal: PropTypes.func,
-    onSticky: PropTypes.func,
     withDismiss: PropTypes.bool,
     withCounters: PropTypes.bool,
     showReplyCount: PropTypes.bool,
@@ -225,10 +222,6 @@ class StatusActionBar extends ImmutablePureComponent {
     this.props.onFilter();
   };
 
-  handleSticky = () => {
-    this.props.onSticky(this.props.status);
-  };
-
 
   render () {
     const { status, statusQuoteState, quotedAccountId, contextType, intl, withDismiss, withCounters, showReplyCount, scrollKey } = this.props;
@@ -326,16 +319,6 @@ class StatusActionBar extends ImmutablePureComponent {
             const domain = status.getIn(['account', 'acct']).split('@')[1];
             menu.push({ text: intl.formatMessage(messages.admin_domain, { domain: domain }), href: `/admin/instances/${domain}` });
           }
-        }
-      }
-
-      // Sticky/unsticky post
-      if (!isRemote && ((permissions & PERMISSION_MANAGE_USERS) === PERMISSION_MANAGE_USERS)) {
-        menu.push(null);
-        if (isSticky){
-          menu.push({ text: intl.formatMessage(messages.unsticky), action: this.handleSticky })
-        } else {
-          menu.push({ text: intl.formatMessage(messages.sticky), action: this.handleSticky })
         }
       }
     }

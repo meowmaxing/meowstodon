@@ -6,13 +6,6 @@ class HomeFeed < Feed
     super(:home, account.id)
   end
 
-  def get(limit, max_id = nil, since_id = nil, min_id = nil)
-    results = super
-    return results if max_id.present? || min_id.present?
-
-    prepend_stickies(results, Sticky.recent_statuses_for_feed)
-  end
-
   def async_refresh
     @async_refresh ||= AsyncRefresh.new(redis_regeneration_key)
   end

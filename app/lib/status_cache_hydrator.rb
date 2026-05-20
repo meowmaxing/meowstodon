@@ -46,7 +46,6 @@ class StatusCacheHydrator
       payload[:favourited] = payload[:reblog][:favourited]
       payload[:reblogged]  = payload[:reblog][:reblogged]
       payload[:quote_approval] = payload[:reblog][:quote_approval]
-      payload[:sticky] = false
     end
   end
 

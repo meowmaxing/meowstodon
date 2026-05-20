@@ -113,8 +113,5 @@
   "status.hide": "Hide post",
   "status.in_reply_to": "This toot is a reply",
   "status.is_poll": "This toot is a poll",
-  "status.local_only": "Only visible from your instance",
-  "status.show_filter_reason": "Show anyway"
-  "status.sticky.make_sticky": "Make this post globally sticky",
-  "status.sticky.unsticky": "Unsticky this post"
+  "status.local_only": "Only visible from your instance"
 }
