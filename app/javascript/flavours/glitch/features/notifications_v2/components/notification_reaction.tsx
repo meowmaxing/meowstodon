@@ -34,28 +34,6 @@ export const NotificationReaction: React.FC<{
     (displayedName, total, seeMoreHref) => {
       if (total === 1)
         return (
-<<<<<<< HEAD
-          <FormattedMessage
-            id='notification.reaction'
-            defaultMessage='{name} reacted to your post <e>with</e>'
-            values={{
-              name: displayedName,
-              e: (chunks) =>
-                notification.reaction ? (
-                  <>
-                    {chunks}{' '}
-                    <HoverableEmoji
-                      emoji={notification.reaction.name}
-                      url={notification.reaction.url}
-                      staticUrl={notification.reaction.static_url}
-                    />
-                  </>
-                ) : (
-                  ''
-                ),
-            }}
-          />
-=======
           <AnimateEmojiProvider>
             <FormattedMessage
               id='notification.reaction'
@@ -76,7 +54,6 @@ export const NotificationReaction: React.FC<{
               }}
             />
           </AnimateEmojiProvider>
->>>>>>> refs/remotes/origin/main
         );
 
       return (
