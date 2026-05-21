@@ -13,7 +13,7 @@ export const AutosuggestEmoji: FC<{ emoji: LegacyEmoji }> = ({ emoji }) => {
   return (
     <div className='autosuggest-emoji'>    <div className='autosuggest-emoji'>
       <Emoji code={emoji.native ?? colons} />
-      <div className='autosuggest-emoji__name'>{colons}</div>      <div className='autosuggest-emoji__name'>{colons}</div>
+      <div className='autosuggest-emoji__name'>{colons}</div>
     </div>
   );
 };
