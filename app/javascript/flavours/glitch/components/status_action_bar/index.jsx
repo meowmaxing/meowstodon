@@ -222,7 +222,6 @@ class StatusActionBar extends ImmutablePureComponent {
     this.props.onFilter();
   };
 
-
   render () {
     const { status, statusQuoteState, quotedAccountId, contextType, intl, withDismiss, withCounters, showReplyCount, scrollKey } = this.props;
     const { signedIn, permissions } = this.props.identity;
@@ -233,7 +232,6 @@ class StatusActionBar extends ImmutablePureComponent {
     const writtenByMe        = status.getIn(['account', 'id']) === me;
     const isRemote           = status.getIn(['account', 'username']) !== status.getIn(['account', 'acct']);
     const isQuotingMe        = quotedAccountId === me;
-    const isSticky = status.get('sticky')
 
     let menu = [];
     let reblogIcon = 'retweet';

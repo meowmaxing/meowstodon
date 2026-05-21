@@ -52,17 +52,24 @@ export const AvatarOverlay: React.FC<Props> = ({
         )}
       </div>
     );
-  } else {
+  } else if (emoji) {
+    const code = isUnicodeEmoji(emoji.name) ? emoji.name : `:${emoji.name}:`;
+    let custom;
+    if (emoji.url) {
+      custom = {
+        [emoji.name]: {
+          shortcode: emoji.name,
+          static_url: emoji.static_url,
+          url: emoji.url,
+        },
+      };
+    }
+
     overlayElement = (
-      <div className='account__emoji' data-emoji-name={emoji?.name}>
-        {emoji && (
-          <Emoji
-            emoji={emoji.name}
-            hovered={hovering}
-            url={emoji.url}
-            staticUrl={emoji.static_url}
-          />
-        )}
+      <div className='account__emoji' data-emoji-name={emoji.name}>
+        <CustomEmojiProvider emojis={custom}>
+          <Emoji code={code} />
+        </CustomEmojiProvider>
       </div>
     );
   }

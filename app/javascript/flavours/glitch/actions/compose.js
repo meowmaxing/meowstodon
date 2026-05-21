@@ -6,7 +6,6 @@ import { throttle } from 'lodash';
 import api from 'flavours/glitch/api';
 import { browserHistory } from 'flavours/glitch/components/router';
 import { countableText } from 'flavours/glitch/features/compose/util/counter';
-import { search as emojiSearch } from 'flavours/glitch/features/emoji/emoji_mart_search_light';
 import { tagHistory } from 'flavours/glitch/settings';
 import { fetchCustomEmojiData } from '@/flavours/glitch/features/emoji/picker';
 import { recoverHashtags } from 'flavours/glitch/utils/hashtag';

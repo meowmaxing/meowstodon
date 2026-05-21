@@ -77,8 +77,6 @@ export const DetailedStatus: React.FC<{
   pictureInPicture,
   onToggleMediaVisibility,
   onToggleHidden,
-  onReactionAdd,
-  onReactionRemove,
   ancestors = 0,
   multiColumn = false,
   expanded,
@@ -306,7 +304,7 @@ export const DetailedStatus: React.FC<{
       );
 
     if (taggedCollection) {
-      media = <CollectionPreviewCard collection={taggedCollection} />;
+      media = <CollectionPreviewCard collection={taggedCollection.toJS()} />;
     } else {
       media = (
         <Card
@@ -522,6 +520,13 @@ export const DetailedStatus: React.FC<{
 
         {/* This is a glitch-soc addition to have a placeholder */}
         {!expanded && <MentionsPlaceholder status={status} />}
+
+        {!!visibleReactions && (
+          <StatusReactions
+            id={status.get('id')}
+            reactions={status.get('reactions').toArray()}
+          />
+        )}
 
         <div className='detailed-status__meta'>
           <div className='detailed-status__meta__line'>

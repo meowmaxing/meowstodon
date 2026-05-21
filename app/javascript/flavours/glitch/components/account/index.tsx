@@ -25,6 +25,7 @@ import { Button } from 'flavours/glitch/components/button';
 import { FollowersCounter } from 'flavours/glitch/components/counters';
 import { DisplayName } from 'flavours/glitch/components/display_name';
 import { Dropdown } from 'flavours/glitch/components/dropdown_menu';
+import { AnimateEmojiProvider } from 'flavours/glitch/components/emoji/context';
 import { FollowButton } from 'flavours/glitch/components/follow_button';
 import { RelativeTimestamp } from 'flavours/glitch/components/relative_timestamp';
 import { ShortNumber } from 'flavours/glitch/components/short_number';
@@ -312,11 +313,13 @@ export const Account: React.FC<AccountProps> = ({
             data-hover-card-account={id}
           >
             <div className='account__avatar-wrapper'>
-              {account ? (
-                <Avatar account={account} size={size} />
-              ) : (
-                <Skeleton width={size} height={size} />
-              )}
+              <AnimateEmojiProvider>
+                {account ? (
+                  statusAvatar
+                ) : (
+                  <Skeleton width={size} height={size} />
+                )}
+              </AnimateEmojiProvider>
             </div>
 
             <div className='account__contents'>

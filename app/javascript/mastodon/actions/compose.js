@@ -6,7 +6,6 @@ import { throttle } from 'lodash';
 import api from 'mastodon/api';
 import { browserHistory } from 'mastodon/components/router';
 import { countableText } from 'mastodon/features/compose/util/counter';
-import { search as emojiSearch } from 'mastodon/features/emoji/emoji_mart_search_light';
 import { tagHistory } from 'mastodon/settings';
 import { fetchCustomEmojiData } from '@/mastodon/features/emoji/picker';
 

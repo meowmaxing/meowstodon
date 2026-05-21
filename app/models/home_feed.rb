@@ -30,12 +30,6 @@ class HomeFeed < Feed
 
   private
 
-  def prepend_stickies(results, stickies)
-    stickies = stickies.to_a
-    sticky_ids = stickies.to_set(&:id)
-    stickies + results.to_a.reject { |s| sticky_ids.include?(s.id) }
-  end
-
   def redis_regeneration_key
     @redis_regeneration_key = "account:#{@account.id}:regeneration"
   end

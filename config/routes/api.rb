@@ -56,10 +56,6 @@ namespace :api, format: false do
 
         post :translate, to: 'translations#create'
       end
-
-      member do
-        get :context
-      end
     end
 
     namespace :timelines do

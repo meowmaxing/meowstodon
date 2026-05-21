@@ -6,7 +6,7 @@ class UnfavouriteService < BaseService
   def call(account, status)
     favourite = Favourite.find_by!(account: account, status: status)
     favourite.destroy!
-    create_notification(favourite)
+    create_notification(favourite) if !status.account.local? && status.account.activitypub?
     favourite
   end
 
@@ -14,14 +14,7 @@ class UnfavouriteService < BaseService
 
   def create_notification(favourite)
     status = favourite.status
-
-    return if status.local_only?
-
-    if status.direct_visibility?
-      ActivityPub::DeliveryWorker.perform_async(build_json(favourite), favourite.account_id, status.account.inbox_url) if status.account.activitypub?
-    else
-      ActivityPub::InteractionDistributionWorker.perform_async(build_json(favourite), favourite.account_id, status.id)
-    end
+    ActivityPub::DeliveryWorker.perform_async(build_json(favourite), favourite.account_id, status.account.inbox_url)
   end
 
   def build_json(favourite)
