@@ -8,7 +8,7 @@ interface LegacyEmoji {
   imageUrl?: string;
 }
 
-export const AutosuggestEmoji: FC<{ emoji: LegacyEmoji }> = ({ emoji }) => {export const AutosuggestEmoji: FC<{ emoji: LegacyEmoji }> = ({ emoji }) => {
+export const AutosuggestEmoji: FC<{ emoji: LegacyEmoji }> = ({ emoji }) => {
   const colons = `:${emoji.id}:`;
   return (
     <div className='autosuggest-emoji'>    <div className='autosuggest-emoji'>
