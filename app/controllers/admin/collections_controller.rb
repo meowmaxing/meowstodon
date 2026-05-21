@@ -20,7 +20,7 @@ module Admin
     def batch
       authorize [:admin, :collection], :index?
 
-      @collection_batch_action = Admin::CollectionBatchAction.new(admin_collection_batch_action_params.merge(current_account: current_account, report_id: params[:report_id], type: action_from_button))
+      @collection_batch_action = Admin::CollectionBatchAction.new(admin_collection_batch_action_params.merge(current_account: current_account, report_id: params[:report_id], type: 'report'))
 
       @collection_batch_action.save!
     rescue ActionController::ParameterMissing
@@ -57,16 +57,5 @@ module Admin
     def set_collections
       @collections = @account.collections.includes(accepted_collection_items: :account).page(params[:page]).per(PER_PAGE)
     end
-<<<<<<< HEAD
-=======
-
-    def action_from_button
-      if params[:report]
-        'report'
-      elsif params[:remove_from_report]
-        'remove_from_report'
-      end
-    end
->>>>>>> parent of 8deef75261 (Merge remote-tracking branch 'refs/remotes/origin/main')
   end
 end

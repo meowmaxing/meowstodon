@@ -24,7 +24,6 @@ import Column from '@/flavours/glitch/features/ui/components/column';
 import { useAccount } from '@/flavours/glitch/hooks/useAccount';
 import { useAccountId } from '@/flavours/glitch/hooks/useAccountId';
 import { useAccountVisibility } from '@/flavours/glitch/hooks/useAccountVisibility';
-import { me } from '@/flavours/glitch/initial_state';
 import { useAppDispatch, useAppSelector } from '@/flavours/glitch/store';
 import AddIcon from '@/material-icons/400-24px/add.svg?react';
 
@@ -174,14 +173,12 @@ const AccountFeatured: React.FC<{ multiColumn: boolean }> = ({
                   defaultMessage='Collections'
                 />
               </h2>
-              {accountId === me && (
-                <SubheadingLink to='/collections/new' icon={AddIcon}>
-                  <FormattedMessage
-                    id='account.featured.new_collection'
-                    defaultMessage='New collection'
-                  />
-                </SubheadingLink>
-              )}
+              <SubheadingLink to='/collections/new' icon={AddIcon}>
+                <FormattedMessage
+                  id='account.featured.new_collection'
+                  defaultMessage='New collection'
+                />
+              </SubheadingLink>
             </Subheading>
             {hasCollections ? (
               <ItemList>

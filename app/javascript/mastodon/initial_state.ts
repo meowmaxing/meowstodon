@@ -48,10 +48,10 @@ interface InitialStateMeta {
   status_page_url: string;
   terms_of_service_enabled: boolean;
   emoji_style?: string;
-  wrapstodon?: InitialStateWrapstodon | null;
+  wrapstodon?: InitialWrapstodonState | null;
 }
 
-interface IntialStateRole {
+interface Role {
   id: string;
   name: string;
   permissions: string;
@@ -60,27 +60,17 @@ interface IntialStateRole {
   collection_limit: number;
 }
 
-interface InitialStateWrapstodon {
+interface InitialWrapstodonState {
   year: number;
   state: ApiAnnualReportState;
-}
-
-interface InitialStateCompose {
-  text: string;
-  default_privacy?: string;
-  default_sensitive?: boolean;
-  default_language?: string;
-  default_quote_policy?: string;
-  me?: string;
 }
 
 export interface InitialState {
   accounts: Record<string, ApiAccountJSON>;
   languages: InitialStateLanguage[];
-  compose: InitialStateCompose;
   critical_updates_pending?: boolean;
   meta: InitialStateMeta;
-  role?: IntialStateRole;
+  role?: Role;
   features: string[];
 }
 

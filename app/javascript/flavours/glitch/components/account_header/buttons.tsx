@@ -3,6 +3,8 @@ import type { FC } from 'react';
 
 import { defineMessages, useIntl } from 'react-intl';
 
+import classNames from 'classnames';
+
 import { followAccount } from '@/flavours/glitch/actions/accounts';
 import { useAccount } from '@/flavours/glitch/hooks/useAccount';
 import { getAccountHidden } from '@/flavours/glitch/selectors/accounts';
@@ -16,7 +18,6 @@ import { FollowButton } from '../follow_button';
 import { IconButton } from '../icon_button';
 
 import { AccountMenu } from './menu';
-import classes from './styles.module.scss';
 
 const messages = defineMessages({
   enableNotifications: {
@@ -48,7 +49,7 @@ export const AccountButtons: FC<AccountButtonsProps> = ({
   const me = useAppSelector((state) => state.meta.get('me') as string);
 
   return (
-    <div className={className}>
+    <div className={classNames('account__header__buttons', className)}>
       {!hidden && (
         <AccountButtonsOther accountId={accountId} noShare={noShare} />
       )}
@@ -93,7 +94,7 @@ const AccountButtonsOther: FC<
       {!isMovedAndUnfollowedAccount && (
         <FollowButton
           accountId={accountId}
-          className={classes.followButton}
+          className='account__header__follow-button'
           labelLength='long'
         />
       )}

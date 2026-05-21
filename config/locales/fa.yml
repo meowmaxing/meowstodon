@@ -1467,7 +1467,6 @@ fa:
     confirmation:
       action: تأیید نشانی رایانامه
       subject: تأیید نشانی رایانامه‌تان
-      title: گرفتن به‌روز رسانی‌های رایانامه‌ای از %{name}؟
     notification:
       create_account: ایجاد حساب ماستودون
       subject:

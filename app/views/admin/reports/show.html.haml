@@ -66,7 +66,7 @@
   %details{ open: @report.collections.any? }
     %summary
       = t 'admin.reports.collections', count: @report.collections.size
-      
+
     = form_with model: @form, url: batch_admin_account_collections_path(@report.target_account_id, report_id: @report.id) do |f|
       .batch-table
         .batch-table__toolbar

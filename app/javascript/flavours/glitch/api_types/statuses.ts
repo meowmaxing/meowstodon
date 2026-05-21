@@ -5,7 +5,6 @@ import type { ApiCustomEmojiJSON } from './custom_emoji';
 import type { ApiMediaAttachmentJSON } from './media_attachments';
 import type { ApiPollJSON } from './polls';
 import type { ApiQuoteJSON, ApiQuotePolicyJSON } from './quotes';
-import type { ApiStatusReactionJSON } from './reaction';
 
 // See app/modals/status.rb
 export type StatusVisibility =

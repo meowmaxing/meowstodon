@@ -272,7 +272,7 @@ export const DetailedStatus: React.FC<{
       );
 
     if (taggedCollection) {
-      media = <CollectionPreviewCard collection={taggedCollection.toJS()} />;
+      media = <CollectionPreviewCard collection={taggedCollection} />;
     } else {
       media = (
         <Card
