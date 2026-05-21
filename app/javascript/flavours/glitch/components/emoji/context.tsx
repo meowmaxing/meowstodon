@@ -6,6 +6,7 @@ import {
   useMemo,
   useState,
 } from 'react';
+import { LocalCustomEmojiProvider } from "./emoji/context";
 
 import { cleanExtraEmojis } from '@/flavours/glitch/features/emoji/normalize';
 import { autoPlayGif } from '@/flavours/glitch/initial_state';
