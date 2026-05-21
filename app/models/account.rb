@@ -86,6 +86,7 @@ class Account < ApplicationRecord
   USERNAME_LENGTH_LIMIT = 30
   DISPLAY_NAME_LENGTH_LIMIT = (ENV['MAX_DISPLAY_NAME_CHARS'] || 30).to_i
   NOTE_LENGTH_LIMIT = (ENV['MAX_BIO_CHARS'] || 500).to_i
+  DESCRIPTION_LENGTH_LIMIT = 1_500
 
   # Hard limits for federated content
   USERNAME_LENGTH_HARD_LIMIT = 2048
@@ -138,6 +139,8 @@ class Account < ApplicationRecord
   validates :display_name, length: { maximum: DISPLAY_NAME_LENGTH_LIMIT }, if: -> { local? && will_save_change_to_display_name? }
   validates :note, note_length: { maximum: NOTE_LENGTH_LIMIT }, if: -> { local? && will_save_change_to_note? }
   validates :fields, length: { maximum: DEFAULT_FIELDS_SIZE }, if: -> { local? && will_save_change_to_fields? }
+  validates :avatar_description, length: { maximum: DESCRIPTION_LENGTH_LIMIT }, if: -> { local? && will_save_change_to_avatar_description? }
+  validates :header_description, length: { maximum: DESCRIPTION_LENGTH_LIMIT }, if: -> { local? && will_save_change_to_header_description? }
   validates_with EmptyProfileFieldNamesValidator, if: -> { local? && will_save_change_to_fields? }
   with_options on: :create, if: :local? do
     validates :followers_url, absence: true
@@ -169,7 +172,13 @@ class Account < ApplicationRecord
   scope :by_recent_activity, -> { left_joins(:user, :account_stat).order(coalesced_activity_timestamps.desc).order(id: :desc) }
   scope :by_domain_and_subdomains, ->(domain) { where(domain: Instance.by_domain_and_subdomains(domain).select(:domain)) }
   scope :not_excluded_by_account, ->(account) { where.not(id: account.excluded_from_timeline_account_ids) }
-  scope :not_domain_blocked_by_account, ->(account) { where(arel_table[:domain].eq(nil).or(arel_table[:domain].not_in(account.excluded_from_timeline_domains))) }
+  scope :not_domain_blocked_by_account, lambda { |account, bubble_only = false|
+    if bubble_only
+      where(arel_table[:domain].in(BubbleDomain.bubble_domains - account.excluded_from_timeline_domains))
+    else
+      where(arel_table[:domain].eq(nil).or(arel_table[:domain].not_in(account.excluded_from_timeline_domains)))
+    end
+  }
   scope :dormant, -> { joins(:account_stat).merge(AccountStat.without_recent_activity) }
   scope :with_username, ->(value) { value.is_a?(Array) ? where(arel_table[:username].lower.in(value.map { |x| x.to_s.downcase })) : where(arel_table[:username].lower.eq(value.to_s.downcase)) }
   scope :with_domain, ->(value) { where arel_table[:domain].lower.eq(value&.to_s&.downcase) }
@@ -265,8 +274,14 @@ class Account < ApplicationRecord
     last_webfingered_at.nil? || last_webfingered_at <= STALE_THRESHOLD.ago
   end
 
+  def needs_background_refresh?
+    return false if local?
+
+    last_webfingered_at.blank? || last_webfingered_at <= BACKGROUND_REFRESH_INTERVAL.ago
+  end
+
   def schedule_refresh_if_stale!
-    return unless last_webfingered_at.present? && last_webfingered_at <= BACKGROUND_REFRESH_INTERVAL.ago
+    return unless needs_background_refresh?
 
     AccountRefreshWorker.perform_in(rand(REFRESH_DEADLINE), id)
   end
@@ -405,6 +420,13 @@ class Account < ApplicationRecord
     return 'local' if local?
 
     @synchronization_uri_prefix ||= "#{uri[URL_PREFIX_RE]}/"
+  end
+
+  def remote_limit_reason
+    domain_block = DomainBlock.find_by(domain: domain)
+    return if domain_block.nil? || domain_block.public_comment.empty?
+
+    domain_block.public_comment
   end
 
   class << self

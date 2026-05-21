@@ -9,9 +9,8 @@ import Overlay from 'react-overlays/Overlay';
 
 import AutosuggestAccountContainer from '../features/compose/containers/autosuggest_account_container';
 
-import AutosuggestEmoji from './autosuggest_emoji';
+import { AutosuggestEmoji } from './autosuggest_emoji';
 import { AutosuggestHashtag } from './autosuggest_hashtag';
-import { LocalCustomEmojiProvider } from './emoji/context';
 
 const textAtCursorMatchesToken = (str, caretPosition, searchTokens) => {
   let word;

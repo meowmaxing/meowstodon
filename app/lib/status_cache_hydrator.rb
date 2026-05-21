@@ -130,6 +130,16 @@ class StatusCacheHydrator
     ).as_json
   end
 
+  def serialized_reactions(account_id, status)
+    reactions = status.reactions(account_id)
+    ActiveModelSerializers::SerializableResource.new(
+      reactions,
+      each_serializer: REST::StatusReactionSerializer,
+      scope: account_id, # terrible
+      scope_name: :current_user
+    ).as_json
+  end
+
   def payload_application
     @status.application.present? ? serialized_status_application_json : nil
   end

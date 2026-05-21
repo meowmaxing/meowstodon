@@ -94,6 +94,8 @@ namespace :admin do
     end
   end
 
+  resources :bubble_domains, only: [:index, :new, :create, :destroy]
+
   resources :instances, only: [:index, :show, :destroy], constraints: { id: %r{[^/]+} }, format: 'html' do
     member do
       post :clear_delivery_errors
@@ -158,7 +160,7 @@ namespace :admin do
     resource :reset, only: [:create]
     resource :action, only: [:new, :create], controller: 'account_actions'
 
-    resources :collections, only: [:show]
+    resources :collections, only: [:index, :show], concerns: :batch
     resources :statuses, only: [:index, :show], concerns: :batch
 
     resources :relationships, only: [:index]

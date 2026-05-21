@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ActivityPub::Activity::Undo < ActivityPub::Activity
+  CUSTOM_EMOJI_REGEX = /^:[^:]+:$/
+
   def perform
     case @object['type']
     when 'Announce'
@@ -11,6 +13,8 @@ class ActivityPub::Activity::Undo < ActivityPub::Activity
       undo_follow
     when 'Like'
       undo_like
+    when 'EmojiReact'
+      undo_emoji_react
     when 'Block'
       undo_block
     when nil
@@ -103,7 +107,7 @@ class ActivityPub::Activity::Undo < ActivityPub::Activity
   def undo_like
     status = status_from_uri(target_uri)
 
-    return if status.nil? || !status.account.local?
+    return if status.nil?
 
     if @account.favourited?(status)
       favourite = status.favourites.where(account: @account).first
@@ -121,7 +125,7 @@ class ActivityPub::Activity::Undo < ActivityPub::Activity
 
     status = status_from_uri(target_uri)
 
-    return if status.nil? || !status.account.local?
+    return if status.nil?
 
     if CUSTOM_EMOJI_REGEX.match?(name)
       name.delete! ':'

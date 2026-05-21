@@ -28,12 +28,14 @@ import { Permalink } from 'flavours/glitch/components/permalink';
 import { PictureInPicturePlaceholder } from 'flavours/glitch/components/picture_in_picture_placeholder';
 import StatusContent from 'flavours/glitch/components/status_content';
 import { QuotedStatus } from 'flavours/glitch/components/status_quoted';
+import { StatusReactions } from 'flavours/glitch/components/status_reactions';
 import { VisibilityIcon } from 'flavours/glitch/components/visibility_icon';
 import { Audio } from 'flavours/glitch/features/audio';
 import { CollectionPreviewCard } from 'flavours/glitch/features/collections/components/collection_preview_card';
 import scheduleIdleTask from 'flavours/glitch/features/ui/util/schedule_idle_task';
 import { Video } from 'flavours/glitch/features/video';
 import { useIdentity } from 'flavours/glitch/identity_context';
+import { visibleReactions } from 'flavours/glitch/initial_state';
 import type { CollectionAttachment } from 'flavours/glitch/models/status';
 import { useAppSelector } from 'flavours/glitch/store';
 import { compareUrls } from 'flavours/glitch/utils/compare_urls';
@@ -60,6 +62,8 @@ export const DetailedStatus: React.FC<{
   pictureInPicture: any;
   onToggleHidden?: (status: any) => void;
   onToggleMediaVisibility?: () => void;
+  onReactionAdd?: (status: any, name: string, url: string) => void;
+  onReactionRemove?: (status: any, name: string) => void;
   ancestors?: number;
   multiColumn?: boolean;
   expanded: boolean;
@@ -77,8 +81,6 @@ export const DetailedStatus: React.FC<{
   pictureInPicture,
   onToggleMediaVisibility,
   onToggleHidden,
-  onReactionAdd,
-  onReactionRemove,
   ancestors = 0,
   multiColumn = false,
   expanded,
@@ -306,7 +308,7 @@ export const DetailedStatus: React.FC<{
       );
 
     if (taggedCollection) {
-      media = <CollectionPreviewCard collection={taggedCollection} />;
+      media = <CollectionPreviewCard collection={taggedCollection.toJS()} />;
     } else {
       media = (
         <Card
@@ -438,6 +440,22 @@ export const DetailedStatus: React.FC<{
     </Link>
   );
 
+  const reactionLink = (
+    <Link
+      to={`/@${status.getIn(['account', 'acct'])}/${status.get('id')}/reactions`}
+      className='detailed-status__link'
+    >
+      <span className='detailed-status__reactions'>
+        <AnimatedNumber value={status.get('reactions_count')} />
+      </span>
+      <FormattedMessage
+        id='status.reactions'
+        defaultMessage='{count, plural, one {reaction} other {reactions}}'
+        values={{ count: status.get('reactions_count') }}
+      />
+    </Link>
+  );
+
   const { statusContentProps, hashtagBar } = getHashtagBarForStatus(
     status as StatusLike,
   );
@@ -525,11 +543,8 @@ export const DetailedStatus: React.FC<{
 
         {!!visibleReactions && (
           <StatusReactions
-            statusId={status.get('id')}
-            reactions={status.get('reactions')}
-            addReaction={onReactionAdd}
-            removeReaction={onReactionRemove}
-            canReact={signedIn}
+            id={status.get('id')}
+            reactions={status.get('reactions').toArray()}
           />
         )}
 
@@ -569,7 +584,7 @@ export const DetailedStatus: React.FC<{
             {reblogLink && <>·</>}
             {quotesLink}
             {quotesLink && <>·</>}
-            {favouriteLink}
+            {favouriteLink}·{reactionLink}
           </div>
         </div>
       </div>
