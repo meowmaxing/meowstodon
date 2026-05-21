@@ -1,3 +1,4 @@
+import { Emoji } from 'flavours/glitch/components/status_reactions';
 import { useHovering } from 'flavours/glitch/hooks/useHovering';
 import { autoPlayGif } from 'flavours/glitch/initial_state';
 import type { Account } from 'flavours/glitch/models/account';
@@ -33,6 +34,38 @@ export const AvatarOverlay: React.FC<Props> = ({
   const friendSrc = hovering
     ? friend?.get('avatar')
     : friend?.get('avatar_static');
+
+  let overlayElement;
+  if (friendSrc) {
+    overlayElement = (
+      <div
+        className='account__avatar'
+        style={{ width: `${overlaySize}px`, height: `${overlaySize}px` }}
+        data-avatar-of={`@${friend?.get('acct')}`}
+      >
+        {friendSrc && (
+          <img
+            src={friendSrc}
+            alt={friend?.get('acct')}
+            onError={handleImgLoadError}
+          />
+        )}
+      </div>
+    );
+  } else {
+    overlayElement = (
+      <div className='account__emoji' data-emoji-name={emoji?.name}>
+        {emoji && (
+          <Emoji
+            emoji={emoji.name}
+            hovered={hovering}
+            url={emoji.url}
+            staticUrl={emoji.static_url}
+          />
+        )}
+      </div>
+    );
+  }
 
   return (
     <div

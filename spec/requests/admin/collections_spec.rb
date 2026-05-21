@@ -12,7 +12,6 @@ RSpec.describe 'Admin Collections' do
   before do
     sign_in Fabricate(:admin_user)
   end
-
   describe 'GET /admin/accounts/:account_id/collections/:id' do
     let(:collection) { Fabricate(:collection) }
 

@@ -24,10 +24,6 @@ import {
 import { openModal } from '@/flavours/glitch/actions/modal';
 import { initMuteModal } from '@/flavours/glitch/actions/mutes';
 import { initReport } from '@/flavours/glitch/actions/reports';
-import {
-  canAccountBeAdded,
-  canAccountBeAddedByFollowers,
-} from '@/flavours/glitch/features/collections/utils';
 import { useAccount } from '@/flavours/glitch/hooks/useAccount';
 import { useIdentity } from '@/flavours/glitch/identity_context';
 import type { Account } from '@/flavours/glitch/models/account';
@@ -221,10 +217,6 @@ const redesignMessages = defineMessages({
     id: 'account.menu.add_to_list',
     defaultMessage: 'Add to list…',
   },
-  addToCollection: {
-    id: 'account.menu.add_to_collection',
-    defaultMessage: 'Add to collection…',
-  },
   openOriginalPage: {
     id: 'account.menu.open_original_page',
     defaultMessage: 'View on {domain}',
@@ -305,57 +297,35 @@ function getMenuItems({
     return items;
   }
 
-  // Add to list
+  // List and featuring options
   if (relationship?.following) {
-    items.push({
-      text: intl.formatMessage(redesignMessages.addToList),
-      action: () => {
-        dispatch(
-          openModal({
-            modalType: 'LIST_ADDER',
-            modalProps: {
-              accountId: account.id,
-            },
-          }),
-        );
+    items.push(
+      {
+        text: intl.formatMessage(redesignMessages.addToList),
+        action: () => {
+          dispatch(
+            openModal({
+              modalType: 'LIST_ADDER',
+              modalProps: {
+                accountId: account.id,
+              },
+            }),
+          );
+        },
       },
-    });
-  }
-
-  // Add to collection
-  if (
-    canAccountBeAdded(account) ||
-    (canAccountBeAddedByFollowers(account) && relationship?.following)
-  ) {
-    items.push({
-      text: intl.formatMessage(redesignMessages.addToCollection),
-      action: () => {
-        dispatch(
-          openModal({
-            modalType: 'COLLECTION_ADDER',
-            modalProps: {
-              accountId: account.id,
-            },
-          }),
-        );
+      {
+        text: intl.formatMessage(
+          relationship.endorsed ? messages.unendorse : messages.endorse,
+        ),
+        action: () => {
+          if (relationship.endorsed) {
+            dispatch(unpinAccount(account.id));
+          } else {
+            dispatch(pinAccount(account.id));
+          }
+        },
       },
-    });
-  }
-
-  // Feature on profile
-  if (relationship?.following) {
-    items.push({
-      text: intl.formatMessage(
-        relationship.endorsed ? messages.unendorse : messages.endorse,
-      ),
-      action: () => {
-        if (relationship.endorsed) {
-          dispatch(unpinAccount(account.id));
-        } else {
-          dispatch(pinAccount(account.id));
-        }
-      },
-    });
+    );
   }
 
   items.push(

@@ -8,7 +8,7 @@ import { browserHistory } from 'mastodon/components/router';
 import { countableText } from 'mastodon/features/compose/util/counter';
 import { search as emojiSearch } from 'mastodon/features/emoji/emoji_mart_search_light';
 import { tagHistory } from 'mastodon/settings';
-import { emojiMartSearch } from '@/mastodon/features/emoji/picker';
+import { fetchCustomEmojiData } from '@/mastodon/features/emoji/picker';
 
 import { showAlert, showAlertForError } from './alerts';
 import { useEmoji } from './emojis';
@@ -594,9 +594,8 @@ const fetchComposeSuggestionsAccounts = throttle((dispatch, token) => {
 }, 200, { leading: true, trailing: true });
 
 const fetchComposeSuggestionsEmojis = async (dispatch, token) => {
-  // Right now we are hard-coding the locale to English since the picker search only supports English.
-  // Once we replace the legacy picker we can remove this and use the actual locale of the user.
-  const results = await emojiMartSearch(token, 'en', 5);
+  const custom = await fetchCustomEmojiData();
+  const results = emojiSearch(token.replace(':', ''), { maxResults: 5, custom });
   dispatch(readyComposeSuggestionsEmojis(token, results));
 };
 
@@ -674,7 +673,7 @@ export function selectComposeSuggestion(position, token, suggestion, path) {
     let completion, startPosition;
 
     if (suggestion.type === 'emoji') {
-      completion    = suggestion.native || `:${suggestion.id}:`;
+      completion    = suggestion.native || suggestion.colons;
       startPosition = position - 1;
 
       dispatch(useEmoji(suggestion));

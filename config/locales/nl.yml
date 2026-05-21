@@ -345,12 +345,6 @@ nl:
       updated_msg: Bijwerken van mededeling geslaagd!
     collections:
       accounts: Accounts
-      back_to_account: Terug naar de accountpagina
-      back_to_report: Terug naar de rapportagepagina
-      batch:
-        add_to_report: 'Aan rapportage #%{id} toevoegen'
-        remove_from_report: Uit de rapportage verwijderen
-        report: Rapportage
       collection_title: Verzameling van %{name}
       contents: Inhoud
       number_of_accounts:

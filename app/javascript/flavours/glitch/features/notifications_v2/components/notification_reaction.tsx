@@ -5,14 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 
 import MoodIcon from '@/material-icons/400-24px/mood.svg?react';
-
-import { Emoji } from 'flavours/glitch/components/emoji';
-import {
-  AnimateEmojiProvider,
-  CustomEmojiProvider,
-} from 'flavours/glitch/components/emoji/context';
-import type { ExtraCustomEmojiMap } from 'flavours/glitch/features/emoji/types';
-import { isUnicodeEmoji } from 'flavours/glitch/features/emoji/utils';
+import { HoverableEmoji } from 'flavours/glitch/components/status_reactions';
 import type { NotificationGroupReaction } from 'flavours/glitch/models/notification_group';
 import { useAppSelector } from 'flavours/glitch/store';
 

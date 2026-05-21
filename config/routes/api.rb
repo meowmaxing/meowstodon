@@ -29,7 +29,6 @@ namespace :api, format: false do
         resources :reblogged_by, controller: :reblogged_by_accounts, only: :index
         resources :favourited_by, controller: :favourited_by_accounts, only: :index
         resource :reblog, only: :create
-        resource :context, only: :show
         post :unreblog, to: 'reblogs#destroy'
 
         resources :quotes, only: :index do
@@ -56,6 +55,10 @@ namespace :api, format: false do
         resource :interaction_policy, only: :update
 
         post :translate, to: 'translations#create'
+      end
+
+      member do
+        get :context
       end
     end
 

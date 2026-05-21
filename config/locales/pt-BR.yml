@@ -487,7 +487,6 @@ pt-BR:
       resolved_dns_records_hint_html: O nome de domínio é associado aos seguintes domínios MX, que são responsáveis por aceitar e-mails. Ao bloquear um domínio MX, você bloqueará as inscrições de qualquer endereço de e-mail que use o mesmo domínio MX, mesmo que o nome de domínio visível seja diferente. <strong>Tenha cuidado para não bloquear os principais provedores de e-mail.</strong>
       resolved_through_html: Resolvido através de %{domain}
       title: Domínios de e-mail bloqueados
-<<<<<<< HEAD
     email_subscriptions:
       accounts:
         account: Conta
@@ -553,8 +552,6 @@ pt-BR:
             2_feature_explanation: Quando os visitantes registrarem no perfil da conta e confirmarem a assinatura, eles receberam atualizações por e-mail caso a conta publique.
             3_privacy_policy_warning: Admins do servidor terão acesso aos PII (e-mails) coletados. Como tal, a política de privacidade e termos de serviço do servidor deve ser atualizada antes de usar este recurso.
             4_cost_warning: Os e-mails talvez sofram uma taxa dependendo da hospedagem. Entre em contato com o hóspede antes de ativá-lo, já que este recurso talvez aumente drasticamente a quantidade de e-mails enviados ao servidor.
-=======
->>>>>>> parent of 059040b044 (Merge remote-tracking branch 'upstream')
     export_domain_allows:
       new:
         title: Importar domínios permitidos
@@ -860,7 +857,6 @@ pt-BR:
         manage_custom_emojis: Gerenciar Emojis Personalizados
         manage_custom_emojis_description: Permite aos usuários gerenciar emojis personalizados no servidor
         manage_email_subscriptions: Gerenciar assinaturas do e-mail
-        manage_email_subscriptions_description: Permitir usuários com esta permissão de ativar o recurso de e-mails de novidades na conta deles
         manage_federation: Gerenciar Federação
         manage_federation_description: Permite aos usuários bloquear ou permitir federação com outros domínios e controlar a entregabilidade
         manage_invites: Gerenciar convites
