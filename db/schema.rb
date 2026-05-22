@@ -12,7 +12,6 @@
 
 ActiveRecord::Schema[8.1].define(version: 2026_05_20_184138) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pgroonga"
   enable_extension "pg_catalog.plpgsql"
 
   create_table "account_aliases", force: :cascade do |t|
