@@ -732,11 +732,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_20_184138) do
 
   create_table "lists", force: :cascade do |t|
     t.bigint "account_id", null: false
-    t.string "title", default: "", null: false
-    t.jsonb "include_keywords", default: [], null: false
-    t.jsonb "exclude_keywords", default: [], null: false
-    t.boolean "with_media_only", default: false, null: false
-    t.boolean "ignore_reblog", default: false, null: false
     t.datetime "created_at", precision: nil, null: false
     t.boolean "exclusive", default: false, null: false
     t.integer "replies_policy", default: 0, null: false
