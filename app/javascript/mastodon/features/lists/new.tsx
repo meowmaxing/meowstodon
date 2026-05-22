@@ -111,7 +111,6 @@ const NewList: React.FC<{ list?: List | null }> = ({ list }) => {
     }
   }, [id, list]);
 
->>>>>>> 04ecbe5aca (Merge remote-tracking branch 'origin/loosen-like-federation')
   const handleTitleChange = useCallback(
     ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
       setTitle(value);
